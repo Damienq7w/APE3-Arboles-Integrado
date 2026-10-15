@@ -47,6 +47,7 @@ public class Main {
         System.out.println("11. Modificar estudiante");
         System.out.println("12. Eliminar estudiante");
         System.out.println("13. Estadísticas del paralelo");
+        System.out.println("14. Traza de recorrido");
         System.out.println(" 0. Salir");
     }
 
@@ -94,6 +95,11 @@ public class Main {
                 ArbolEstudiantes abb = paralelo();
                 return "Total: " + abb.contar() + " | Altura: " + abb.altura() + " | Menor: " + abb.menor().getMatricula()
                         + " | Mayor: " + abb.mayor().getMatricula() + String.format(" | Promedio general: %.2f", abb.promedioGeneral());
+            });
+            case 14 -> ejecutar("Traza de recorrido", () -> {
+                ArbolEstudiantes abb = paralelo();
+                TipoRecorrido tipo = TipoRecorrido.valueOf(leerTexto("Tipo " + java.util.Arrays.toString(TipoRecorrido.values()) + ": ").toUpperCase());
+                return System.lineSeparator() + abb.trazaRecorrido(tipo);
             });
             case 0 -> {
             }
