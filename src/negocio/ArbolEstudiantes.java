@@ -150,24 +150,6 @@ public class ArbolEstudiantes {
         e.setNombres(nombres);
         e.setPromedio(promedio);
         return true;
-<<<<<<< Updated upstream
-    }
-
-    // Busqueda propia del nodo
-    private NodoEstudiante buscarNodo(NodoEstudiante nodo, int matricula) {
-        if (nodo == null) {                       // caso base: no existe
-            return null;
-        }
-        int actual = nodo.getDato().getMatricula();
-        if (matricula == actual) {                // caso base: encontrado
-            return nodo;
-        }
-        if (matricula < actual) {                 // caso recursivo: izquierda
-            return buscarNodo(nodo.getIzquierdo(), matricula);
-        }
-        return buscarNodo(nodo.getDerecho(), matricula); // caso recursivo: derecha
-=======
->>>>>>> Stashed changes
     }
 
     // Busqueda propia del nodo
