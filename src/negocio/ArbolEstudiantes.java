@@ -21,8 +21,16 @@ public class ArbolEstudiantes {
         return raiz == null;
     }
 
+    // B1: inserta un estudiante sin matriculas repetidas (recursivo, O(h))
     public boolean insertar(Estudiante estudiante) {
-        throw new UnsupportedOperationException("Pendiente: Fase 2 (insertar)");
+        if (estudiante == null) {
+            throw new IllegalArgumentException("El estudiante no puede ser null");
+        }
+        if (buscar(estudiante.getMatricula()) != null) {
+            return false; // matricula repetida
+        }
+        raiz = insertar(raiz, estudiante);
+        return true;
     }
 
     public Estudiante buscar(int matricula) {
