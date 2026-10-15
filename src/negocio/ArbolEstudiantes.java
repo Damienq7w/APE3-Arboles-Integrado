@@ -136,8 +136,35 @@ public class ArbolEstudiantes {
         secuencia.append(matricula).append(" ");
     }
 
+    /** Modifica cedula, nombres y promedio. La matricula no cambia. */
     public boolean modificar(int matricula, String cedula, String nombres, double promedio) {
-        throw new UnsupportedOperationException("Pendiente: Fase 3 (modificar)");
+        NodoEstudiante nodo = buscarNodo(raiz, matricula);
+        if (nodo == null) {
+            return false;
+        }
+        // Primero validar todo con un Estudiante temporal (lanza excepcion si hay datos invalidos)
+        new Estudiante(matricula, cedula, nombres, promedio);
+        // Solo despues de validar se cambian los datos del estudiante real
+        Estudiante e = nodo.getDato();
+        e.setCedula(cedula);
+        e.setNombres(nombres);
+        e.setPromedio(promedio);
+        return true;
+    }
+
+    // Busqueda propia del nodo
+    private NodoEstudiante buscarNodo(NodoEstudiante nodo, int matricula) {
+        if (nodo == null) {                       // caso base: no existe
+            return null;
+        }
+        int actual = nodo.getDato().getMatricula();
+        if (matricula == actual) {                // caso base: encontrado
+            return nodo;
+        }
+        if (matricula < actual) {                 // caso recursivo: izquierda
+            return buscarNodo(nodo.getIzquierdo(), matricula);
+        }
+        return buscarNodo(nodo.getDerecho(), matricula); // caso recursivo: derecha
     }
 
     public boolean eliminar(int matricula) {
