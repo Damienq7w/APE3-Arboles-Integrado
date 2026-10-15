@@ -65,6 +65,41 @@ public class ArbolEstudiantes {
         posorden(nodo.getIzquierdo(), lista);
         posorden(nodo.getDerecho(), lista);
         lista.add(nodo.getDato());
+
+        
+    }
+        // Traza del recorrido: una linea por paso, sangria por nivel
+    public String trazaRecorrido(TipoRecorrido tipo) {
+        if (tipo == null) {
+            throw new IllegalArgumentException("El tipo de recorrido es obligatorio");
+        }
+        StringBuilder traza = new StringBuilder();
+        StringBuilder secuencia = new StringBuilder();
+        traza(raiz, tipo, 0, traza, secuencia);
+        traza.append("Secuencia ").append(tipo).append(": ").append(secuencia.toString().trim());
+        return traza.toString();
+    }
+
+    // Recursion de la traza: entra, null -> regresa y VISITA segun el tipo
+    private void traza(NodoEstudiante nodo, TipoRecorrido tipo, int nivel, StringBuilder traza, StringBuilder secuencia) {
+        String sangria = "  ".repeat(nivel);
+        if (nodo == null) {
+            traza.append(sangria).append("null -> regresa\n");
+            return;
+        }
+        int m = nodo.getDato().getMatricula();
+        traza.append(sangria).append("entra ").append(m).append("\n");
+        if (tipo == TipoRecorrido.PREORDEN) visitar(m, sangria, traza, secuencia);
+        traza(nodo.getIzquierdo(), tipo, nivel + 1, traza, secuencia);
+        if (tipo == TipoRecorrido.INORDEN) visitar(m, sangria, traza, secuencia);
+        traza(nodo.getDerecho(), tipo, nivel + 1, traza, secuencia);
+        if (tipo == TipoRecorrido.POSORDEN) visitar(m, sangria, traza, secuencia);
+    }
+
+    // Registra la visita en la traza y en la secuencia
+    private void visitar(int matricula, String sangria, StringBuilder traza, StringBuilder secuencia) {
+        traza.append(sangria).append("VISITA ").append(matricula).append("\n");
+        secuencia.append(matricula).append(" ");
     }
 
     public boolean modificar(int matricula, String cedula, String nombres, double promedio) {
