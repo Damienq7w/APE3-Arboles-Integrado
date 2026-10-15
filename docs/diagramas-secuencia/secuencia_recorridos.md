@@ -1,7 +1,24 @@
-# Diagrama de secuencia: recorridos y traza (ABB)
+# Secuencia de recorridos
 
-> **Responsable:** Darwin · **Rama:** `Rama-Joel`
+```mermaid
+sequenceDiagram
+    participant Main
+    participant ArbolEstudiantes as ArbolEstudiantes
 
-Pendiente: lo completa Darwin en su rama.
+    Main->>ArbolEstudiantes: recorrer(PREORDEN)
+    ArbolEstudiantes->>ArbolEstudiantes: preorden(raiz, lista)
+    Note right of ArbolEstudiantes: visita nodo, agrega a lista
+    ArbolEstudiantes->>ArbolEstudiantes: preorden(izquierdo, lista)
+    ArbolEstudiantes->>ArbolEstudiantes: preorden(derecho, lista)
+    Note right of ArbolEstudiantes: caso base: nodo == null, regresa
+    ArbolEstudiantes-->>Main: List<Estudiante>
 
-**Que debe poner:** un diagrama Mermaid `sequenceDiagram` de recorrer(PREORDEN) y trazaRecorrido con las llamadas recursivas izquierda y derecha y el caso base null. Flecha continua = llamada, punteada = respuesta, `alt` para los casos. Debajo, un parrafo que lo explique con los datos de la expo. Formato de referencia: `secuencia_agregar_buscar.md` y el repo de expo del Grupo 1.
+    Main->>ArbolEstudiantes: trazaRecorrido(tipo)
+    ArbolEstudiantes->>ArbolEstudiantes: traza(raiz, tipo, 0)
+    ArbolEstudiantes->>ArbolEstudiantes: traza(izquierdo, tipo, nivel+1)
+    ArbolEstudiantes->>ArbolEstudiantes: traza(derecho, tipo, nivel+1)
+    Note right of ArbolEstudiantes: caso base: null -> regresa
+    ArbolEstudiantes-->>Main: texto de la traza
+```
+
+En PREORDEN cada nodo se visita antes que sus hijos. Para el paralelo SW-N3-B (con el 45 de Kenneth) la secuencia es: 50 30 20 40 35 45 70 60 65 80. Complejidad O(n).
