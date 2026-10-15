@@ -150,6 +150,24 @@ public class ArbolEstudiantes {
         e.setNombres(nombres);
         e.setPromedio(promedio);
         return true;
+<<<<<<< Updated upstream
+    }
+
+    // Busqueda propia del nodo
+    private NodoEstudiante buscarNodo(NodoEstudiante nodo, int matricula) {
+        if (nodo == null) {                       // caso base: no existe
+            return null;
+        }
+        int actual = nodo.getDato().getMatricula();
+        if (matricula == actual) {                // caso base: encontrado
+            return nodo;
+        }
+        if (matricula < actual) {                 // caso recursivo: izquierda
+            return buscarNodo(nodo.getIzquierdo(), matricula);
+        }
+        return buscarNodo(nodo.getDerecho(), matricula); // caso recursivo: derecha
+=======
+>>>>>>> Stashed changes
     }
 
     // Busqueda propia del nodo
@@ -167,8 +185,48 @@ public class ArbolEstudiantes {
         return buscarNodo(nodo.getDerecho(), matricula); // caso recursivo: derecha
     }
 
+    /** Elimina un estudiante por matricula. false si no existe. */
     public boolean eliminar(int matricula) {
-        throw new UnsupportedOperationException("Pendiente: Fase 3 (eliminar)");
+        if (buscarNodo(raiz, matricula) == null) {
+            return false;
+        }
+        raiz = eliminar(raiz, matricula);
+        return true;
+    }
+
+    private NodoEstudiante eliminar(NodoEstudiante nodo, int matricula) {
+        if (nodo == null) {                       // caso base: no se encontro
+            return nodo;
+        }
+        int actual = nodo.getDato().getMatricula();
+        if (matricula < actual) {                 // caso recursivo: izquierda
+            nodo.setIzquierdo(eliminar(nodo.getIzquierdo(), matricula));
+        } else if (matricula > actual) {          // caso recursivo: derecha
+            nodo.setDerecho(eliminar(nodo.getDerecho(), matricula));
+        } else {                                  // nodo encontrado
+            if (nodo.getIzquierdo() == null && nodo.getDerecho() == null) {
+                return null;                      // caso 1: hoja
+            }
+            if (nodo.getIzquierdo() == null) {
+                return nodo.getDerecho();         // caso 2: solo hijo derecho
+            }
+            if (nodo.getDerecho() == null) {
+                return nodo.getIzquierdo();       // caso 2: solo hijo izquierdo
+            }
+            // caso 3: dos hijos -> sucesor inorden (menor del subarbol derecho)
+            Estudiante sucesor = minimo(nodo.getDerecho());
+            nodo.setDato(sucesor);
+            nodo.setDerecho(eliminar(nodo.getDerecho(), sucesor.getMatricula()));
+        }
+        return nodo;
+    }
+
+    // Menor del subarbol: baja siempre por la izquierda
+    private Estudiante minimo(NodoEstudiante nodo) {
+        if (nodo.getIzquierdo() == null) {        // caso base
+            return nodo.getDato();
+        }
+        return minimo(nodo.getIzquierdo());       // caso recursivo
     }
 
     public int altura() {
