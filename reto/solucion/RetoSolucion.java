@@ -5,90 +5,85 @@ import negocio.NodoEstudiante;
 
 /**
  * Responsable: Monica - Rama: Sara-Tacuri
- * Para que: solucion del reto con traza y casos de prueba [OK] / [FALLA].
- *
- * Solucion del reto: recursividad en un ABB (paralelo ENF-N2-A).
- * Cuenta nodos, cuenta hojas y calcula la altura (en aristas).
+ * Para que: solucion del reto de recorridos (SW-N3-A) con pruebas [OK]/[FALLA].
+ * Solo se muestra en los minutos 57-60 de la expo.
  */
 public class RetoSolucion {
 
-    private static boolean mostrarTraza = true;
-    private static int ok = 0;
-    private static int fallas = 0;
-
-    // Inserta una matricula en el ABB (ignora repetidos)
     static NodoEstudiante insertar(NodoEstudiante nodo, int matricula) {
-        if (nodo == null) { // caso base: lugar libre
+        if (nodo == null) {
             return new NodoEstudiante(new Estudiante(matricula,
                     String.format("18%08d", matricula),
                     "Estudiante " + matricula, 8));
         }
         int actual = nodo.getDato().getMatricula();
-        if (matricula < actual) { // caso recursivo: izquierda
+        if (matricula < actual) {
             nodo.setIzquierdo(insertar(nodo.getIzquierdo(), matricula));
-        } else if (matricula > actual) { // caso recursivo: derecha
+        } else if (matricula > actual) {
             nodo.setDerecho(insertar(nodo.getDerecho(), matricula));
         }
         return nodo;
     }
 
-    // Imprime una linea de la traza (solo si esta activada)
-    private static void traza(String sangria, String texto) {
-        if (mostrarTraza) {
-            System.out.println(sangria + texto);
+    static boolean conTraza = false;
+
+    static void traza(String linea) {
+        if (conTraza) {
+            System.out.println(linea);
         }
     }
 
-    // 1 + nodos de la izquierda + nodos de la derecha
-    static int contarNodos(NodoEstudiante nodo, String sangria) {
+    // PREORDEN: nodo, izquierda, derecha. O(n)
+    static void preorden(NodoEstudiante nodo, String sangria, StringBuilder salida) {
         if (nodo == null) { // caso base
-            traza(sangria, "null -> 0");
-            return 0;
+            traza(sangria + "null -> regresa");
+            return;
         }
         int m = nodo.getDato().getMatricula();
-        traza(sangria, "entra " + m);
-        int izq = contarNodos(nodo.getIzquierdo(), sangria + "  "); // caso recursivo
-        int der = contarNodos(nodo.getDerecho(), sangria + "  ");
-        int total = 1 + izq + der;
-        traza(sangria, "nodo " + m + " -> " + total);
-        return total;
+        traza(sangria + "entra " + m);
+        traza(sangria + "VISITA " + m);
+        salida.append(m).append(' ');
+        preorden(nodo.getIzquierdo(), sangria + "  ", salida);
+        preorden(nodo.getDerecho(), sangria + "  ", salida);
     }
 
-    // una hoja vale 1; si no, suma las hojas de sus dos lados
-    static int contarHojas(NodoEstudiante nodo, String sangria) {
-        if (nodo == null) { // caso base: no hay nodo
-            traza(sangria, "null -> 0");
-            return 0;
+    // INORDEN: izquierda, nodo, derecha. O(n)
+    static void inorden(NodoEstudiante nodo, String sangria, StringBuilder salida) {
+        if (nodo == null) {
+            traza(sangria + "null -> regresa");
+            return;
         }
         int m = nodo.getDato().getMatricula();
-        traza(sangria, "entra " + m);
-        if (nodo.esHoja()) { // caso base: hoja
-            traza(sangria, "nodo " + m + " -> 1 (hoja)");
-            return 1;
-        }
-        int izq = contarHojas(nodo.getIzquierdo(), sangria + "  "); // caso recursivo
-        int der = contarHojas(nodo.getDerecho(), sangria + "  ");
-        traza(sangria, "nodo " + m + " -> " + (izq + der));
-        return izq + der;
+        traza(sangria + "entra " + m);
+        inorden(nodo.getIzquierdo(), sangria + "  ", salida);
+        traza(sangria + "VISITA " + m);
+        salida.append(m).append(' ');
+        inorden(nodo.getDerecho(), sangria + "  ", salida);
     }
 
-    // altura en aristas: arbol vacio = -1, hoja = 0
-    static int altura(NodoEstudiante nodo, String sangria) {
-        if (nodo == null) { // caso base
-            traza(sangria, "null -> -1");
+    // POSORDEN: izquierda, derecha, nodo. O(n)
+    static void posorden(NodoEstudiante nodo, String sangria, StringBuilder salida) {
+        if (nodo == null) {
+            traza(sangria + "null -> regresa");
+            return;
+        }
+        int m = nodo.getDato().getMatricula();
+        traza(sangria + "entra " + m);
+        posorden(nodo.getIzquierdo(), sangria + "  ", salida);
+        posorden(nodo.getDerecho(), sangria + "  ", salida);
+        traza(sangria + "VISITA " + m);
+        salida.append(m).append(' ');
+    }
+
+    // EXTRA: altura en aristas. Hoja 0, vacio -1
+    static int altura(NodoEstudiante nodo) {
+        if (nodo == null) {
             return -1;
         }
-        int m = nodo.getDato().getMatricula();
-        traza(sangria, "entra " + m);
-        int izq = altura(nodo.getIzquierdo(), sangria + "  "); // caso recursivo
-        int der = altura(nodo.getDerecho(), sangria + "  ");
-        int h = 1 + Math.max(izq, der);
-        traza(sangria, "nodo " + m + " -> " + h);
-        return h;
+        return 1 + Math.max(altura(nodo.getIzquierdo()), altura(nodo.getDerecho()));
     }
 
-    // Construye un ABB a partir de una lista de matriculas
-    private static NodoEstudiante construir(int... matriculas) {
+    static NodoEstudiante construir(int[] matriculas) {
         NodoEstudiante raiz = null;
         for (int m : matriculas) {
             raiz = insertar(raiz, m);
@@ -96,57 +91,54 @@ public class RetoSolucion {
         return raiz;
     }
 
-    // Compara y marca [OK] o [FALLA]
-    private static void probar(String nombre, int esperado, int obtenido) {
-        boolean paso = esperado == obtenido;
-        if (paso) {
-            ok++;
+    static int pasadas = 0;
+    static int total = 0;
+
+    static void comprobar(String nombre, String obtenido, String esperado) {
+        total++;
+        if (obtenido.equals(esperado)) {
+            pasadas++;
+            System.out.println("[OK]    " + nombre + ": " + obtenido);
         } else {
-            fallas++;
+            System.out.println("[FALLA] " + nombre + ": obtuvo '" + obtenido
+                    + "' y esperaba '" + esperado + "'");
         }
-        System.out.println((paso ? "[OK] " : "[FALLA] ") + nombre
-                + " | esperado: " + esperado + " | obtenido: " + obtenido);
+    }
+
+    static void probar(String caso, int[] matriculas, String pre, String in, String pos, int alt) {
+        NodoEstudiante raiz = construir(matriculas);
+        StringBuilder a = new StringBuilder();
+        StringBuilder b = new StringBuilder();
+        StringBuilder c = new StringBuilder();
+        preorden(raiz, "", a);
+        inorden(raiz, "", b);
+        posorden(raiz, "", c);
+        comprobar(caso + " preorden", a.toString().trim(), pre);
+        comprobar(caso + " inorden", b.toString().trim(), in);
+        comprobar(caso + " posorden", c.toString().trim(), pos);
+        comprobar(caso + " altura", String.valueOf(altura(raiz)), String.valueOf(alt));
     }
 
     public static void main(String[] args) {
-        // Arbol del enunciado (paralelo ENF-N2-A) con traza completa
-        NodoEstudiante raiz = construir(40, 20, 60, 10, 30, 50, 70, 25);
-        System.out.println("=== CONTAR NODOS ===");
-        int nodos = contarNodos(raiz, "");
-        System.out.println("Nodos: " + nodos);
-        System.out.println("=== CONTAR HOJAS ===");
-        int hojas = contarHojas(raiz, "");
-        System.out.println("Hojas: " + hojas);
-        System.out.println("=== ALTURA ===");
-        int alt = altura(raiz, "");
-        System.out.println("Altura: " + alt);
-
-        // Casos de prueba (sin traza para no llenar la pantalla)
+        System.out.println("=== Traza INORDEN del reto SW-N3-A ===");
+        conTraza = true;
+        StringBuilder demo = new StringBuilder();
+        inorden(construir(new int[] { 45, 25, 70, 10, 30, 60, 90, 27, 65 }), "", demo);
+        conTraza = false;
         System.out.println();
-        System.out.println("=== PRUEBAS ===");
-        mostrarTraza = false;
-        probar("ENF-N2-A nodos", 8, nodos);
-        probar("ENF-N2-A hojas", 4, hojas);
-        probar("ENF-N2-A altura", 3, alt);
 
-        probar("Arbol vacio nodos", 0, contarNodos(null, ""));
-        probar("Arbol vacio hojas", 0, contarHojas(null, ""));
-        probar("Arbol vacio altura", -1, altura(null, ""));
-
-        NodoEstudiante uno = construir(50);
-        probar("Un solo nodo nodos", 1, contarNodos(uno, ""));
-        probar("Un solo nodo hojas", 1, contarHojas(uno, ""));
-        probar("Un solo nodo altura", 0, altura(uno, ""));
-
-        NodoEstudiante cadena = construir(10, 20, 30, 40);
-        probar("Cadena 10-20-30-40 nodos", 4, contarNodos(cadena, ""));
-        probar("Cadena 10-20-30-40 hojas", 1, contarHojas(cadena, ""));
-        probar("Cadena 10-20-30-40 altura", 3, altura(cadena, ""));
-
-        NodoEstudiante repetido = construir(30, 30);
-        probar("Repetido 30 dos veces nodos", 1, contarNodos(repetido, ""));
+        probar("Reto SW-N3-A", new int[] { 45, 25, 70, 10, 30, 60, 90, 27, 65 },
+                "45 25 10 30 27 70 60 65 90",
+                "10 25 27 30 45 60 65 70 90",
+                "10 27 30 25 65 60 90 70 45", 3);
+        probar("Vacio", new int[] {}, "", "", "", -1);
+        probar("Un nodo", new int[] { 50 }, "50", "50", "50", 0);
+        probar("Cadena", new int[] { 10, 20, 30, 40 },
+                "10 20 30 40", "10 20 30 40", "40 30 20 10", 3);
+        probar("Repetido", new int[] { 20, 30, 30, 10 },
+                "20 10 30", "10 20 30", "10 30 20", 1);
 
         System.out.println();
-        System.out.println("Resultado: " + ok + " OK, " + fallas + " fallas");
+        System.out.println("Resultado: " + pasadas + "/" + total + " pruebas OK");
     }
 }
