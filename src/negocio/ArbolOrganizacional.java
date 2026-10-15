@@ -18,12 +18,40 @@ public class ArbolOrganizacional {
         return raiz;
     }
 
+    // A1: agrega una unidad bajo su padre (codigo unico y regla jerarquica)
     public boolean agregar(String codigoPadre, UnidadAcademica unidad) {
-        throw new UnsupportedOperationException("Pendiente: Fase 2 (agregar)");
+        if (codigoPadre == null || unidad == null) {
+            return false;
+        }
+        if (buscar(unidad.getCodigo()) != null) {
+            return false; // el codigo ya existe en el arbol
+        }
+        NodoUnidad padre = buscar(codigoPadre);
+        if (padre == null) {
+            return false; // el padre no existe
+        }
+        return padre.agregarHijo(new NodoUnidad(unidad)); // valida la jerarquia
     }
 
+    // A2: busca una unidad por codigo (recursivo, O(n))
     public NodoUnidad buscar(String codigo) {
-        throw new UnsupportedOperationException("Pendiente: Fase 2 (buscar)");
+        if (codigo == null || codigo.isBlank()) {
+            return null;
+        }
+        return buscar(raiz, codigo.trim().toUpperCase());
+    }
+
+    private NodoUnidad buscar(NodoUnidad nodo, String codigo) {
+        if (nodo.getDato().getCodigo().equals(codigo)) {
+            return nodo; // caso base: lo encontro
+        }
+        for (NodoUnidad hijo : nodo.getHijos()) {
+            NodoUnidad encontrado = buscar(hijo, codigo); // caso recursivo
+            if (encontrado != null) {
+                return encontrado;
+            }
+        }
+        return null; // no esta en este subarbol
     }
 
     public String mostrarJerarquia() {

@@ -50,7 +50,8 @@ TODO: recorridos del paralelo SW-N3-B con el 45 y resultado despues de eliminar 
 | TODO | TODO | TODO |
 
 ## Documentacion
-- [Diagramas de secuencia](docs/DIAGRAMA-SECUENCIA.md)
+- [Diagramas de secuencia](docs/diagramas-secuencia/)
+- [Diagramas de flujo](docs/diagramas-flujo/)
 - [Trazas de recorridos](docs/trazas_recorridos.md)
 - [Trazas de insercion y eliminacion](docs/trazas_insercion_eliminacion.md)
 - [Casos de prueba](docs/casos_prueba.md)
