@@ -54,9 +54,22 @@ public class ArbolOrganizacional {
         return null; // no esta en este subarbol
     }
 
+    //muestra la jerarquia en preorden, 2 espacios por nivel. O(n)
     public String mostrarJerarquia() {
-        throw new UnsupportedOperationException("Pendiente: Fase 2 (mostrarJerarquia)");
+        StringBuilder sb = new StringBuilder();
+        mostrarJerarquia(raiz, 0, sb);
+        return System.lineSeparator() + sb.toString().stripTrailing();
     }
+
+    // Escribe el nodo con su sangria y llama a cada hijo con un nivel mas
+    private void mostrarJerarquia(NodoUnidad nodo, int nivel, StringBuilder sb) {
+        if (nodo == null) return; // caso base: arbol vacio
+        sb.append("  ".repeat(nivel)).append(nodo.getDato()).append(System.lineSeparator());
+        for (NodoUnidad hijo : nodo.getHijos()) {
+            mostrarJerarquia(hijo, nivel + 1, sb);
+        }
+    }
+
 
     public int altura() {
         throw new UnsupportedOperationException("Pendiente: Fase 2 (altura)");
