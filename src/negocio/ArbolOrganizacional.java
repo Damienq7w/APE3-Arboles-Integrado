@@ -62,12 +62,34 @@ public class ArbolOrganizacional {
         throw new UnsupportedOperationException("Pendiente: Fase 2 (altura)");
     }
 
+    // A4: grado = cantidad de hijos de la unidad (-1 si el codigo no existe)
     public int grado(String codigo) {
-        throw new UnsupportedOperationException("Pendiente: Fase 2 (grado)");
+        NodoUnidad nodo = buscar(codigo);
+        if (nodo == null) {
+            return -1; // el codigo no existe
+        }
+        return nodo.getHijos().size();
     }
 
+    // A4: nivel = distancia desde la raiz, UTA = 0 (-1 si el codigo no existe)
     public int nivel(String codigo) {
-        throw new UnsupportedOperationException("Pendiente: Fase 2 (nivel)");
+        if (codigo == null || codigo.isBlank()) {
+            return -1;
+        }
+        return nivel(raiz, codigo.trim().toUpperCase(), 0);
+    }
+
+    private int nivel(NodoUnidad nodo, String codigo, int profundidad) {
+        if (nodo.getDato().getCodigo().equals(codigo)) {
+            return profundidad; // caso base: lo encontro
+        }
+        for (NodoUnidad hijo : nodo.getHijos()) {
+            int n = nivel(hijo, codigo, profundidad + 1); // caso recursivo
+            if (n != -1) {
+                return n;
+            }
+        }
+        return -1; // no esta en este subarbol
     }
 
     public int contarHojas() {
