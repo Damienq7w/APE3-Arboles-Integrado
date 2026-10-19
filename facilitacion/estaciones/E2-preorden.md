@@ -4,7 +4,7 @@
 >
 > **Para qué:** practicar el recorrido preorden y leer la recursión escribiendo su traza (`entra`, `VISITA` y `null -> regresa`) de un subárbol.
 
-**Tiempo:** 7 minutos. El ejercicio está en la laptop de la estación, sin hojas impresas.
+Cada grupo resuelve esta parte en su puesto; Darwin pasa por los grupos ayudando.
 
 ## Lista de matrículas
 
@@ -25,7 +25,7 @@ Se insertan en este orden en un árbol binario de búsqueda (ABB):
    - Al final, la línea `Secuencia PREORDEN: ...`.
 4. Responde: ¿cuántas veces aparece `null -> regresa` y por qué?
 
-Cuando terminen, un integrante publica en el Padlet, en la columna de su grupo, una nota con el título **E2** y la respuesta (escrita o en foto).
+La respuesta va en la nota del grupo en la columna **Preguntas** del Padlet, en la parte **E2**, junto con la **pregunta 3**: ¿en qué momento se visita el nodo en preorden y en posorden?
 
 ## Solución
 

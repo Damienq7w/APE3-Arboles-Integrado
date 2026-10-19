@@ -1,6 +1,6 @@
 # Estación 4: Caza el error
 
-**Tiempo:** 7 minutos. **Archivo:** `ErrorRecursivo.java`.
+**Archivo:** `ErrorRecursivo.java` (en esta misma carpeta). Cada grupo lo descarga del repositorio y lo ejecuta en su puesto; Monica pasa por los grupos ayudando.
 
 ## Ejercicio
 
@@ -10,7 +10,7 @@ El programa construye un ABB con la lista de matrículas de las estaciones (38, 
 2. Lee lo que imprime y compáralo con lo que debería salir.
 3. Encuentra los dos errores. Di en qué método está cada uno y por qué ocurre.
 4. Corrígelos y vuelve a ejecutar.
-5. Publica en el Padlet, en la columna de tu grupo, una nota "E4" con los dos errores que encontraron y cómo los corrigieron (escrito o en foto).
+5. Escribe en la nota del grupo en la columna **Preguntas** del Padlet, en la parte **E4**, los dos errores que encontraron y cómo los corrigieron.
 
 ### Pistas
 

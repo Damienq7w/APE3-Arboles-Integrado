@@ -1,6 +1,6 @@
-# Estaciones de la Fase 2 (APE 3)
+# Reto de trazas de la Fase 2 (APE 3)
 
-El lunes 19/10/2026 cada grupo pasa por las cuatro estaciones. En todas se trabaja con la misma lista de matrículas.
+El lunes 19/10/2026 cada grupo trabaja **en su puesto** y resuelve las cuatro partes del reto (E1 a E4). No hay rotación. En todas las partes se usa la misma lista de matrículas.
 
 ## Lista de matrículas
 
@@ -10,31 +10,42 @@ Se insertan en este orden en un árbol binario de búsqueda (ABB):
 38, 18, 55, 8, 28, 48, 75, 23, 33, 68
 ```
 
-## Estaciones
+## Partes del reto
 
-| Estación | Tema | Archivo | Atiende |
+| Parte | Tema | Archivo | Ayuda |
 | --- | --- | --- | --- |
-| E1 | Inserción en el ABB | E1-insercion.md | Kenneth |
+| E1 | Inserción del 45 en el ABB | E1-insercion.md | Kenneth |
 | E2 | Recorrido preorden con traza | E2-preorden.md | Darwin |
 | E3 | Inorden y posorden | E3-inorden-posorden.md | Luis |
 | E4 | Caza el error | E4-caza-el-error.md y ErrorRecursivo.java | Monica |
 
-## Rotación
+Kenneth, Darwin, Luis y Monica pasan por los puestos ayudando, cada uno con su parte.
 
-Cada estación dura 7 minutos. Entre estación y estación hay 1 minuto para cambiarse. El ejercicio está en la laptop de la estación o en la diapositiva, no hay hojas impresas.
+Para E4, cada grupo descarga `ErrorRecursivo.java` de esta carpeta y lo ejecuta:
 
-| Ronda | Grupo 1 | Grupo 3 | Grupo 4 | Grupo 5 |
-| --- | --- | --- | --- | --- |
-| 1 | E1 | E2 | E3 | E4 |
-| 2 | E2 | E3 | E4 | E1 |
-| 3 | E3 | E4 | E1 | E2 |
-| 4 | E4 | E1 | E2 | E3 |
-
-Tiempo total: 3 minutos de instrucciones, 4 rondas de 7 minutos, 3 cambios de 1 minuto y 1 minuto de margen. En total, 35 minutos.
+```
+javac ErrorRecursivo.java
+java ErrorRecursivo
+```
 
 ## Cómo se publica en el Padlet
 
-1. Al terminar la estación, un integrante del grupo escanea el código QR del Padlet.
-2. Publica una nota en la columna de SU grupo.
-3. La nota lleva el nombre de la estación (por ejemplo "E1") y la respuesta del grupo, escrita o en foto.
-4. Se publica una nota por estación, o sea cuatro notas por grupo.
+El Padlet tiene una columna de ejemplo (Grupo 2), una columna por grupo y una columna **Preguntas**.
+
+1. **En la columna del grupo**, dos diagramas hechos en Mermaid (no a mano):
+   - **Diagrama 1:** el ABB con el 45 insertado y su camino resaltado.
+   - **Diagrama 2:** el ABB después de eliminar el 18 (nodo con dos hijos), indicando qué nodo sube.
+2. **En la columna Preguntas**, una sola nota con el número del grupo, que contiene:
+   - las respuestas de E1, E2, E3 y E4;
+   - las 6 preguntas guía de la Fase 2.
+
+Las respuestas de esa nota se copian después al Word de la Fase 2 (Tabla 2 y preguntas guía), y la captura de la columna del grupo va en los anexos.
+
+## Las 6 preguntas guía
+
+1. ¿Cuál es el caso base de insertar y qué ocurre en él?
+2. ¿Por qué el recorrido inorden de un ABB sale ordenado?
+3. ¿En qué momento se visita el nodo en preorden y en posorden?
+4. ¿Por qué buscar en el árbol general recorre los hijos uno por uno y en el ABB no?
+5. Al eliminar un nodo con dos hijos, ¿por qué se usa el sucesor inorden?
+6. ¿Qué pasa con la altura y la velocidad del ABB si las matrículas llegan ya ordenadas?

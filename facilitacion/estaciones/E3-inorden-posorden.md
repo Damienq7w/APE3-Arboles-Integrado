@@ -4,7 +4,7 @@
 >
 > **Para qué:** predecir los recorridos inorden y posorden de un ABB y entender por qué el inorden sale ordenado por matrícula.
 
-**Tiempo:** 7 minutos. El ejercicio está en la laptop de la estación, sin hojas impresas.
+Cada grupo resuelve esta parte en su puesto; Luis pasa por los grupos ayudando.
 
 ## Lista de matrículas
 
@@ -21,7 +21,7 @@ Se insertan en este orden en un árbol binario de búsqueda (ABB):
 3. Explica por qué el inorden sale ordenado de menor a mayor.
 4. Responde: ¿qué matrícula sale primero y cuál sale al final en el posorden?
 
-Cuando terminen, un integrante publica en el Padlet, en la columna de su grupo, una nota con el título **E3** y la respuesta (escrita o en foto).
+La respuesta va en la nota del grupo en la columna **Preguntas** del Padlet, en la parte **E3**, junto con la **pregunta 2**: ¿por qué el recorrido inorden de un ABB sale ordenado?
 
 ## Solución
 
