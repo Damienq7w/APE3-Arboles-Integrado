@@ -83,8 +83,20 @@ public class ArbolOrganizacional {
         throw new UnsupportedOperationException("Pendiente: Fase 2 (nivel)");
     }
 
+        // A4: cuenta las hojas del arbol (recursivo, O(n))
     public int contarHojas() {
-        throw new UnsupportedOperationException("Pendiente: Fase 2 (contarHojas)");
+        return contarHojas(raiz);
+    }
+
+    private int contarHojas(NodoUnidad nodo) {
+        if (nodo.esHoja()) {
+            return 1; // caso base: no tiene hijos
+        }
+        int total = 0;
+        for (NodoUnidad hijo : nodo.getHijos()) {
+            total += contarHojas(hijo); // caso recursivo
+        }
+        return total;
     }
 
     public boolean eliminar(String codigo) {
