@@ -11,7 +11,7 @@
 
 ## Padlet de la Fase 2
 
-Enlace pendiente de incorporar cuando Mónica lo comparta.
+[Acceder al Padlet de la Fase 2](https://padlet.com/tacurisantillanmonicasara/ape-3-fase-2-sja-uta-s024mxu6e8yorelh8i8w)
 
 El Padlet corresponde a la actividad APE 3 · Fase 2 · SJA-UTA y debe tener una columna para cada grupo participante: Grupo 1, Grupo 3, Grupo 4 y Grupo 5.
 
