@@ -58,9 +58,29 @@ public class ArbolOrganizacional {
         throw new UnsupportedOperationException("Pendiente: Fase 2 (mostrarJerarquia)");
     }
 
+    // A4: calcula la altura del arbol general de forma recursiva
     public int altura() {
-        throw new UnsupportedOperationException("Pendiente: Fase 2 (altura)");
+        return altura(raiz);
     }
+
+    private int altura(NodoUnidad nodo) {
+        if (nodo == null) {
+            return -1;
+        }
+
+        int mayorAltura = -1;
+
+        for (NodoUnidad hijo : nodo.getHijos()) {
+            int alturaHijo = altura(hijo);
+
+            if (alturaHijo > mayorAltura) {
+                mayorAltura = alturaHijo;
+            }
+        }
+
+        return 1 + mayorAltura;
+    }
+
 
     public int grado(String codigo) {
         throw new UnsupportedOperationException("Pendiente: Fase 2 (grado)");
