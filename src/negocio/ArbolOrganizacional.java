@@ -63,19 +63,42 @@ public class ArbolOrganizacional {
 
     // Escribe el nodo con su sangria y llama a cada hijo con un nivel mas
     private void mostrarJerarquia(NodoUnidad nodo, int nivel, StringBuilder sb) {
-        if (nodo == null) return; // caso base: arbol vacio
-        sb.append("  ".repeat(nivel)).append(nodo.getDato()).append(System.lineSeparator());
+        if (nodo == null) {
+            return;
+        }
+
+        sb.append("  ".repeat(nivel))
+          .append(nodo.getDato())
+          .append(System.lineSeparator());
+
         for (NodoUnidad hijo : nodo.getHijos()) {
             mostrarJerarquia(hijo, nivel + 1, sb);
         }
     }
 
-
+    // A4: calcula la altura del arbol general de forma recursiva
     public int altura() {
-        throw new UnsupportedOperationException("Pendiente: Fase 2 (altura)");
+        return altura(raiz);
     }
 
-    // A4: grado = cantidad de hijos de la unidad (-1 si el codigo no existe)
+    private int altura(NodoUnidad nodo) {
+        if (nodo == null) {
+            return -1;
+        }
+
+        int mayorAltura = -1;
+
+        for (NodoUnidad hijo : nodo.getHijos()) {
+            int alturaHijo = altura(hijo);
+
+            if (alturaHijo > mayorAltura) {
+                mayorAltura = alturaHijo;
+            }
+        }
+
+        return 1 + mayorAltura;
+    }
+
     public int grado(String codigo) {
         NodoUnidad nodo = buscar(codigo);
         if (nodo == null) {
