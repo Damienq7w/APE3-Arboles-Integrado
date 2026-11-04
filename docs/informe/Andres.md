@@ -8,13 +8,13 @@ Validar y garantizar la integridad del registro y la búsqueda de estudiantes de
 2. **`src/negocio/ArbolEstudiantes.java`:** Se optimizó el método `buscar(int matricula)` añadiendo una guarda inicial para retornar `null` de inmediato si se consultan matrículas negativas o cero, manteniendo la eficiencia $O(h)$ en las operaciones recursivas.
 
 ## Pruebas
-| Entrada | Esperado | Obtenido | Evidencia |
-|---|---|---|---|
-| Inserción válida: Matrícula `25`, CI `1801234567`, Nombre `Andres Moyota`, Prom `9.5` | Inserción aceptada en el ABB del paralelo | `true` (Estudiante registrado correctamente) | Captura local |
-| Búsqueda de estudiante existente: Matrícula `35` | Retorna los datos completos del estudiante registrado | Objeto Estudiante con sus datos y promedio | Captura local |
-| Inserción de matrícula duplicada: Matrícula `30` | Rechazo de la inserción sin alterar ni duplicar el nodo | `false` (Matrícula duplicada rechazada) | Captura local |
-| Búsqueda de matrícula inexistente: Matrícula `99` | Retorno de `null` de forma controlada | `null` (Estudiante no encontrado) | Captura local |
-| Inserción con promedio inválido: Promedio `NaN` | Excepción controlada por el modelo `Estudiante` | `IllegalArgumentException` (Promedio no válido) | Captura local |
+| Entrada | Esperado | Obtenido |
+|---|---|---|
+| Inserción válida: Matrícula `25`, CI `1801234567`, Nombre `Andres Moyota`, Prom `9.5` | Inserción aceptada en el ABB del paralelo | `true` (Estudiante registrado correctamente) |
+| Búsqueda de estudiante existente: Matrícula `35` | Retorna los datos completos del estudiante registrado | Objeto Estudiante con sus datos y promedio |
+| Inserción de matrícula duplicada: Matrícula `30` | Rechazo de la inserción sin alterar ni duplicar el nodo | `false` (Matrícula duplicada rechazada) |
+| Búsqueda de matrícula inexistente: Matrícula `99` | Retorno de `null` de forma controlada | `null` (Estudiante no encontrado) |
+| Inserción con promedio inválido: Promedio `NaN` | Excepción controlada por el modelo `Estudiante` | `IllegalArgumentException` (Promedio no válido) |
 
 ## Dos preguntas y respuestas
 
