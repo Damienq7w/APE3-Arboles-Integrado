@@ -7,11 +7,20 @@ public class Estudiante {
     private String nombres;
     private double promedio;
 
-    public Estudiante(int matricula, String cedula, String nombres, double promedio) {
+    public Estudiante(
+            int matricula,
+            String cedula,
+            String nombres,
+            double promedio) {
+
         if (matricula <= 0) {
-            throw new IllegalArgumentException("La matrícula debe ser positiva");
+            throw new IllegalArgumentException(
+                "La matricula debe ser positiva"
+            );
         }
+
         this.matricula = matricula;
+
         setCedula(cedula);
         setNombres(nombres);
         setPromedio(promedio);
@@ -27,8 +36,11 @@ public class Estudiante {
 
     public void setCedula(String cedula) {
         if (cedula == null || !cedula.matches("\\d{10}")) {
-            throw new IllegalArgumentException("La cédula debe tener 10 dígitos");
+            throw new IllegalArgumentException(
+                "La cedula debe tener 10 digitos"
+            );
         }
+
         this.cedula = cedula;
     }
 
@@ -38,8 +50,11 @@ public class Estudiante {
 
     public void setNombres(String nombres) {
         if (nombres == null || nombres.isBlank()) {
-            throw new IllegalArgumentException("Los nombres no pueden estar vacíos");
+            throw new IllegalArgumentException(
+                "Los nombres no pueden estar vacios"
+            );
         }
+
         this.nombres = nombres.trim();
     }
 
@@ -48,14 +63,26 @@ public class Estudiante {
     }
 
     public void setPromedio(double promedio) {
-        if (promedio < 0 || promedio > 10) {
-            throw new IllegalArgumentException("El promedio debe estar entre 0 y 10");
+        if (!Double.isFinite(promedio)
+                || promedio < 0
+                || promedio > 10) {
+
+            throw new IllegalArgumentException(
+                "El promedio debe ser un numero finito entre 0 y 10"
+            );
         }
+
         this.promedio = promedio;
     }
 
     @Override
     public String toString() {
-        return String.format("[%d] %s | CI %s | promedio %.2f", matricula, nombres, cedula, promedio);
+        return String.format(
+            "[%d] %s | CI %s | promedio %.2f",
+            matricula,
+            nombres,
+            cedula,
+            promedio
+        );
     }
 }
