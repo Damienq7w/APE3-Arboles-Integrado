@@ -1,5 +1,7 @@
 package enums;
 
-public class TipoRecorrido {
-    
+public enum TipoRecorrido {
+    PREORDEN,
+    INORDEN,
+    POSORDEN
 }

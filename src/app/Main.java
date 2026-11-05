@@ -56,11 +56,103 @@ public class Main {
          System.out.println("Insertado="+c.estudiantes().insertar(new modelo.Estudiante(m,ci,nombre,prom)));
     }
 
+    // Aporte de Lenin: submenu para consultar recorridos,
+    // trazas y estadisticas del arbol de estudiantes.
+    // Reutiliza los metodos de negocio existentes.
     private static void mostrarRecorridosYEstadisticas(Contexto c, Scanner in) {
-        // TODO G4 Lenin: Separar consulta de recorridos y estadisticas en submenu; verificar resultados en arbol normal, vacio y cadena.
-         for(enums.TipoRecorrido t:enums.TipoRecorrido.values())System.out.println(t+"\n"+c.estudiantes().trazaRecorrido(t));
-         System.out.println("Cantidad="+c.estudiantes().contar()+" Altura="+c.estudiantes().altura());
-         System.out.println("Menor="+c.estudiantes().menor()+" Mayor="+c.estudiantes().mayor()+" Promedio="+c.estudiantes().promedioGeneral());
+        negocio.ArbolEstudiantes arbol = c.estudiantes();
+
+        // Mantiene el submenu abierto hasta elegir volver.
+        while (true) {
+            System.out.println("\nRECORRIDOS Y ESTADISTICAS");
+            System.out.println("1. Preorden");
+            System.out.println("2. Inorden");
+            System.out.println("3. Posorden");
+            System.out.println("4. Traza de un recorrido");
+            System.out.println("5. Estadisticas");
+            System.out.println("0. Volver al menu principal");
+            System.out.print("Seleccione una opcion: ");
+
+            if (!in.hasNextLine())
+                return;
+            String opcion = in.nextLine().trim();
+
+            switch (opcion) {
+                // Consulta el recorrido y muestra las matriculas.
+                case "1", "2", "3" -> {
+                    enums.TipoRecorrido tipo = switch (opcion) {
+                        case "1" -> enums.TipoRecorrido.PREORDEN;
+                        case "2" -> enums.TipoRecorrido.INORDEN;
+                        default -> enums.TipoRecorrido.POSORDEN;
+                    };
+
+                    java.util.List<Integer> matriculas = new java.util.ArrayList<>();
+
+                    for (modelo.Estudiante estudiante : arbol.recorrer(tipo)) {
+                        matriculas.add(estudiante.getMatricula());
+                    }
+
+                    System.out.println(tipo + ": " + matriculas);
+                }
+
+                // Permite elegir la traza que se desea consultar.
+                case "4" -> {
+                    System.out.println(
+                            "1. Preorden / 2. Inorden / 3. Posorden / 0. Volver");
+                    System.out.print("Seleccione la traza: ");
+
+                    if (!in.hasNextLine())
+                        return;
+                    String opcionTraza = in.nextLine().trim();
+
+                    if (opcionTraza.equals("0"))
+                        continue;
+
+                    enums.TipoRecorrido tipo = switch (opcionTraza) {
+                        case "1" -> enums.TipoRecorrido.PREORDEN;
+                        case "2" -> enums.TipoRecorrido.INORDEN;
+                        case "3" -> enums.TipoRecorrido.POSORDEN;
+                        default -> null;
+                    };
+
+                    if (tipo == null) {
+                        System.out.println("Opcion de traza invalida");
+                    } else {
+                        System.out.println(arbol.trazaRecorrido(tipo));
+                    }
+                }
+
+                // Consulta las estadisticas y contempla el arbol vacio.
+                case "5" -> {
+                    modelo.Estudiante menor = arbol.menor();
+                    modelo.Estudiante mayor = arbol.mayor();
+
+                    System.out.println("Cantidad=" + arbol.contar());
+                    System.out.println("Altura (aristas)=" + arbol.altura());
+
+                    System.out.println("Menor matricula="
+                            + (menor == null
+                                    ? "Sin estudiantes"
+                                    : menor.getMatricula()));
+
+                    System.out.println("Mayor matricula="
+                            + (mayor == null
+                                    ? "Sin estudiantes"
+                                    : mayor.getMatricula()));
+
+                    System.out.println(
+                            "Promedio general=" + arbol.promedioGeneral());
+                }
+
+                // Regresa al menu principal.
+                case "0" -> {
+                    return;
+                }
+
+                // Informa cuando la opcion ingresada no existe.
+                default -> System.out.println("Opcion invalida");
+            }
+        }
     }
 
     private static void modificarOEliminarEstudiante(Contexto c, Scanner in) {
