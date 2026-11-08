@@ -84,35 +84,48 @@ Se trasladaron las matrículas 10, 40, 45 y 30 desde EB-N1-A hacia EB-N1-B.
 
 Se ejecutó `java -cp out app.Main` y se introdujo la siguiente secuencia.
 
-| Paso | Opción                             | Resultado observado                                        |
-| ---- | ---------------------------------- | ---------------------------------------------------------- |
-| 1    | 8                                  | 97/97 verificaciones correctas                             |
-| 2    | 8 nuevamente                       | Se obtuvo el mismo resultado                               |
-| 3    | 6                                  | EB-N1-A mostró cinco estudiantes y promedio 8.36           |
-| 4    | 7                                  | Se confirmó el reinicio de los datos                       |
-| 5    | 6                                  | EB-N1-A mostró nueve estudiantes, altura 3 y promedio 8.00 |
-| 6    | 1, ingresando EB-N1-A              | Se mostró la ruta institucional                            |
-| 7    | 5, subopción 2, ingresando EB-N1-A | Se rechazó eliminar el paralelo con estudiantes            |
+| Paso | Opción                             | Resultado observado                                                                    |
+| ---- | ---------------------------------- | -------------------------------------------------------------------------------------- |
+| 1    | 8                                  | 97/97 verificaciones correctas                                                         |
+| 2    | 8 nuevamente                       | Se obtuvo el mismo resultado                                                           |
+| 3    | 6                                  | Árbol con 3 hojas; EB-N1-A con 5 estudiantes y promedio 8.36; EB-N1-B con 4 y 8.00     |
+| 4    | 7                                  | Se confirmó el reinicio de los datos                                                   |
+| 5    | 6                                  | Árbol con 2 hojas; EB-N1-A con 9 estudiantes, altura 3 y promedio 8.00; EB-N1-B vacío  |
+| 6    | 3, ingresando EB-N1-B              | Estadísticas del paralelo B: cantidad 0, sin estudiantes                               |
+| 7    | 1, ingresando EB-N1-A              | Se mostró la ruta `UTA -> FCHE -> EB -> EB-N1 -> EB-N1-A`                              |
+| 8    | 5, subopción 2, ingresando EB-N1-A | Se rechazó eliminar el paralelo con estudiantes                                        |
+
+En las opciones 2, 3 y 4 se escribe el código del paralelo; con Enter se usa EB-N1-A.
 
 ## Capturas
 
 ### Figura 1. Compilación del proyecto con Java 21
 
-![Compilación](evidencias/01-compilacion.png)
+`java -version` muestra el JDK 21, `javac` compila todo `src` sin mensajes de error y el código de salida es 0.
+
+![Compilación del proyecto](evidencias/01-compilacion.png)
 
 ### Figura 2. Ruta institucional y transformación binaria
 
 ![Ruta y transformación](evidencias/02-misiones-1-y-2.png)
 
-### Figura 3. Recorridos antes y después de los traslados
+### Figura 3. Salida completa de la opción 8, de la Misión 1 a la Misión 6
 
-![Traslados, parte 1](evidencias/03-traslados.png)
+Parte 1: menú, inicio del reto, Misión 1 y comienzo de la Misión 2.
 
-![Traslados, parte 2](evidencias/03-traslados-parte-2.png)
+![Opción 8, parte 1](evidencias/03-traslados.png)
 
-![Traslados, parte 3](evidencias/03-traslados-parte-3.png)
+Parte 2: fin de la Misión 2, Misión 3 y comienzo de la Misión 4 (modificación de 35 y traslado de 10).
 
-![Traslados, parte 4](evidencias/03-traslados-parte-4.png)
+![Opción 8, parte 2](evidencias/03-traslados-parte-2.png)
+
+Parte 3: traslados de 40, 45 y 30 con el inorden antes y después, y Misión 5.
+
+![Opción 8, parte 3](evidencias/03-traslados-parte-3.png)
+
+Parte 4: Misión 6, resumen de 97/97 y regreso al menú.
+
+![Opción 8, parte 4](evidencias/03-traslados-parte-4.png)
 
 ### Figura 4. Comparación final y resultado del reto
 
@@ -120,11 +133,15 @@ Se ejecutó `java -cp out app.Main` y se introdujo la siguiente secuencia.
 
 ### Figura 5. Recuperación del estado inicial
 
+Opción 7 seguida de la opción 6: el árbol vuelve a tener 2 hojas, EB-N1-A recupera sus 9 estudiantes con promedio 8,00 y EB-N1-B queda vacío.
+
 ![Reinicio y estado general del sistema](evidencias/05-reinicio.png)
 
-### Figura 6. Historial local de commits
+### Figura 6. Historial de commits
 
-![Historial local de commits](evidencias/06-historial-local.png)
+`git log --graph` con los commits y pull requests de los 6 integrantes.
+
+![Historial de commits](evidencias/06-historial-local.png)
 
 ### Figura 7. Pull request #5 fusionado en main
 
