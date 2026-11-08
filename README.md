@@ -60,7 +60,7 @@ java -cp out app.RetoIntegrador
 
 | Integrante            | Aporte                                                        |
 | --------------------- | ------------------------------------------------------------- |
-| Damián Cunalata       | Misiones 1 y 6 · Ruta institucional, integración y reinicio   |
+| Damian Cunalata       | Misiones 1 y 6 · Ruta institucional, integración y reinicio   |
 | Mónica Tacuri         | Misión 2 · Eliminación protegida y transformación binaria     |
 | Kenneth Chalco        | Misión 3 · Validaciones y traslado entre paralelos            |
 | Luis Silva            | Misión 4 · Modificación segura y casos de eliminación del ABB |

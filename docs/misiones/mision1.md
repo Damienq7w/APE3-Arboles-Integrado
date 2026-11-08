@@ -1,6 +1,6 @@
 # Misión 1 — Jerarquía y ruta institucional
 
-> **Responsable:** Damián Cunalata · **Archivos:** `RutaJerarquica.java`, `RetoMision1.java` (y la llamada en `ArbolOrganizacional.java`)
+> **Responsable:** Damian Cunalata · **Archivos:** `RutaJerarquica.java`, `RetoMision1.java` (y la llamada en `ArbolOrganizacional.java`)
 
 ## Qué se hizo
 

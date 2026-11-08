@@ -1,6 +1,6 @@
 # Misión 6 — Integración y reinicio
 
-> **Responsable:** Damián Cunalata (integrador) · **Archivos:** `Main.java`, `Contexto.java`, `RetoIntegrador.java`, `ArbolOrganizacional.java`
+> **Responsable:** Damian Cunalata (integrador) · **Archivos:** `Main.java`, `Contexto.java`, `RetoIntegrador.java`, `ArbolOrganizacional.java`
 
 ## Opción 8: «Ejecutar reto integrador»
 
