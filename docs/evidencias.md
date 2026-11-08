@@ -98,12 +98,6 @@ Se ejecutó `java -cp out app.Main` y se introdujo la siguiente secuencia.
 
 ## Capturas
 
-Las imágenes fueron tomadas directamente de la terminal.
-
-Las figuras 2 a 4 muestran fragmentos seleccionados de la salida de `app.RetoIntegrador`. La figura 5 corresponde al menú de `app.Main`.
-
-Las figuras 6 y 7 muestran el historial local incluido en el ZIP del repositorio. La captura de la página web de los pull requests queda pendiente.
-
 ### Figura 1. Compilación del proyecto con Java 21
 
 ![Compilación](evidencias/01-compilacion.png)
@@ -114,20 +108,26 @@ Las figuras 6 y 7 muestran el historial local incluido en el ZIP del repositorio
 
 ### Figura 3. Recorridos antes y después de los traslados
 
-![Traslados](evidencias/03-traslados.png)
+![Traslados, parte 1](evidencias/03-traslados.png)
+
+![Traslados, parte 2](evidencias/03-traslados-parte-2.png)
+
+![Traslados, parte 3](evidencias/03-traslados-parte-3.png)
+
+![Traslados, parte 4](evidencias/03-traslados-parte-4.png)
 
 ### Figura 4. Comparación final y resultado del reto
 
-![Resultado del reto](evidencias/04-comparacion-y-resumen.png)
+![Comparación de paralelos y 97 de 97 verificaciones correctas](evidencias/04-comparacion-y-resumen.png)
 
 ### Figura 5. Recuperación del estado inicial
 
-![Reinicio](evidencias/05-reinicio.png)
+![Reinicio y estado general del sistema](evidencias/05-reinicio.png)
 
 ### Figura 6. Historial local de commits
 
-![Historial](evidencias/06-historial-local.png)
+![Historial local de commits](evidencias/06-historial-local.png)
 
-### Figura 7. Fusiones de los pull requests registradas en main
+### Figura 7. Pull request #5 fusionado en main
 
-![Fusiones](evidencias/07-pr-en-historial.png)
+![Pull request de rama-Josue fusionado en main](evidencias/07-pr-en-historial.png)
