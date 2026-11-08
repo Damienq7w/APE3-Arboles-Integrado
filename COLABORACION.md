@@ -27,7 +27,7 @@ git log --graph --format="%h %an - %s"
 
 | Fase | Fecha | Grupo que facilita | Repositorio original | Commits | Pull requests |
 |---|---|---|---|---|---|
-| 1 · Modelado | 12/10/2026 | Grupo 1 | Entregado como código base y subido al repositorio del curso | 1 | — |
+| 1 · Modelado | 12/10/2026 | Grupo 1 | [APE3-Arboles](https://github.com/juanchicoyunda1234/APE3-Arboles) | 25 | — |
 | 2 · Recursividad | 19/10/2026 | Grupo 2 | [APE3-Arboles-Grupo2](https://github.com/Damienq7w/APE3-Arboles-Grupo2) | 76 | 12 |
 | 3 · Actualización | 22/10/2026 | Grupo 3 | [APE3_ArbolGeneral_ABB_Grupo3](https://github.com/ElJoss09/APE3_ArbolGeneral_ABB_Grupo3) | 6 | — |
 | 4 · Integración | 05/11/2026 | Grupo 4 | [APE3-Grupo4-Integracion-y-pruebas-](https://github.com/shirleymikaela2/APE3-Grupo4-Integracion-y-pruebas-) | 25 | 10 |
