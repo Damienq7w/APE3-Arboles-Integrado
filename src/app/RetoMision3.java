@@ -5,6 +5,7 @@ import negocio.ArbolEstudiantes;
 import negocio.ArbolOrganizacional;
 
 // Mision 3: validacion de datos y traslado entre paralelos
+// Responsable: Kenneth Chalco
 final class RetoMision3 {
 
     private RetoMision3() {

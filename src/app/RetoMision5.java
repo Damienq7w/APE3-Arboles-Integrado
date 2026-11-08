@@ -4,7 +4,7 @@ import enums.TipoRecorrido;
 import negocio.ArbolEstudiantes;
 
 // Mision 5: recorridos y estadisticas comparadas de EB-N1-A y EB-N1-B
-
+// Responsable: Darwin Tisalema
 final class RetoMision5 {
 
     private static final double NOTA_MINIMA = 8.00;

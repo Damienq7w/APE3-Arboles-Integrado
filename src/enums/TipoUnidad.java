@@ -1,5 +1,6 @@
 package enums;
 
+// Responsable: Kenneth Chalco
 public enum TipoUnidad {
     UNIVERSIDAD,
     FACULTAD,

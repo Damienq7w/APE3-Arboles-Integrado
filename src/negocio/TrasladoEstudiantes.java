@@ -3,6 +3,7 @@ package negocio;
 import enums.TipoUnidad;
 import modelo.Estudiante;
 
+// Responsable: Kenneth Chalco
 public final class TrasladoEstudiantes {
 
     private TrasladoEstudiantes() {

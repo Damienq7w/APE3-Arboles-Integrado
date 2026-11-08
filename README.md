@@ -69,7 +69,7 @@ java -cp out app.RetoIntegrador
 
 ## Resultado y documentación
 
-La copia local integrada obtuvo **97/97 verificaciones correctas**. El documento de evidencias identifica los commits y el archivo de referencia utilizados para ejecutar la misión 2.
+El reto integrado en `main` obtuvo **97/97 verificaciones correctas**.
 
 - [Descripción de las misiones](docs/misiones/)
 - [Decisiones de implementación](docs/decisiones.md)

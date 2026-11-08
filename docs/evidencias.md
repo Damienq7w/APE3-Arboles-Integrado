@@ -6,11 +6,9 @@ Responsable de documentación — Jampier Camacho.
 
 Las pruebas se realizaron con Java 21 en una copia local del proyecto.
 
-Se utilizó `main` en el commit `47b770b`, integrado con la rama `origin/Monica_Tacuri` en el commit `ce9b1c8`.
+Se utilizó la rama `main` con las seis misiones integradas.
 
-El archivo `RetoMision2.java` de esa rama contenía únicamente la declaración de la clase. Para completar la ejecución se utilizó su implementación del commit 4 del paquete de referencia.
-
-Los resultados de este documento corresponden a esa copia local integrada.
+Los resultados de este documento corresponden a esa ejecución.
 
 ## Resultado general
 

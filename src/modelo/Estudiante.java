@@ -1,5 +1,6 @@
 package modelo;
 
+// Responsable: Kenneth Chalco
 public class Estudiante {
 
     private final int matricula;
