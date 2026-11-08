@@ -2,8 +2,6 @@ package negocio;
 
 import modelo.Estudiante;
 
-// Responsable: Luis Silva
-
 public class NodoEstudiante {
 
     private Estudiante dato;

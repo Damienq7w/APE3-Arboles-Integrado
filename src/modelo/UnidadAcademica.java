@@ -2,7 +2,6 @@ package modelo;
 
 import enums.TipoUnidad;
 
-// Responsable: Kenneth Chalco
 public class UnidadAcademica {
 
     private final String codigo;

@@ -1,9 +1,10 @@
+
 package negocio;
 
 import enums.TipoUnidad;
 import modelo.UnidadAcademica;
+import java.util.List;
 
-// Responsable: Damian Cunalata
 public class ArbolOrganizacional {
 
     private NodoUnidad raiz;
@@ -205,35 +206,149 @@ public class ArbolOrganizacional {
         return total;
     }
 
-    // ===== Operaciones del reto =====
-    // ArbolOrganizacional conserva las firmas que pide el enunciado y delega
-    // cada operacion en la clase auxiliar de su responsable.
-
-    // Mision 1: ruta desde UTA hasta la unidad (RutaJerarquica)
-    public String obtenerRutaJerarquica(String codigo) {
-        return RutaJerarquica.obtener(raiz, codigo);
-    }
-
-    // Mision 2: elimina solo hojas vacias (EliminadorUnidades)
+    // A5: Eliminar unidad de manera segura
     public boolean eliminar(String codigo) {
-        return EliminadorUnidades.eliminar(raiz, codigo);
+
+        if (codigo == null
+                || codigo.isBlank()
+                || raiz == null) {
+            return false;
+        }
+
+        codigo = codigo.trim().toUpperCase();
+
+        NodoUnidad objetivo = buscar(codigo);
+
+        if (objetivo == null || !puedeEliminarUnidad(objetivo)) {
+            return false;
+        }
+
+        if (objetivo == raiz) {
+            raiz = null;
+            return true;
+        }
+
+        return eliminar(raiz, codigo);
     }
 
-    // Mision 2: arbol binario hijo izquierdo / hermano derecho (TransformadorBinario)
-    public NodoBinario construirBinario() {
-        return TransformadorBinario.construir(raiz);
+    // Comprueba que la unidad no tenga
+    // subunidades ni estudiantes matriculados
+    private boolean puedeEliminarUnidad(NodoUnidad nodo) {
+
+        if (nodo == null || !nodo.esHoja()) {
+            return false;
+        }
+
+        ArbolEstudiantes estudiantes = nodo.getEstudiantes();
+
+        return estudiantes == null || estudiantes.estaVacio();
     }
 
+    private boolean eliminar(NodoUnidad padre, String codigo) {
+
+        if (padre == null) {
+            return false;
+        }
+
+        for (NodoUnidad hijo : padre.getHijos()) {
+
+            if (hijo.getDato().getCodigo().equals(codigo)) {
+
+                if (!puedeEliminarUnidad(hijo)) {
+                    return false;
+                }
+
+                return padre.eliminarHijo(hijo);
+            }
+
+            if (eliminar(hijo, codigo)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // A6: Representacion hijo izquierdo / hermano derecho
     public String transformarABinario() {
-        return TransformadorBinario.mostrar(construirBinario());
+
+        if (raiz == null) {
+            return "Arbol vacio.";
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        transformarNodo(
+            raiz,
+            0,
+            "Raiz",
+            sb
+        );
+
+        return sb.toString().stripTrailing();
     }
 
-    public String relacionBinaria(String codigo) {
-        return TransformadorBinario.relacion(construirBinario(), codigo);
+    private void transformarNodo(
+            NodoUnidad nodo,
+            int profundidad,
+            String relacion,
+            StringBuilder sb) {
+
+        if (nodo == null) {
+            return;
+        }
+
+        sb.append("  ".repeat(profundidad))
+          .append(relacion)
+          .append(": ")
+          .append(nodo.getDato().getCodigo())
+          .append(System.lineSeparator());
+
+        List<NodoUnidad> hijos = nodo.getHijos();
+
+        if (!hijos.isEmpty()) {
+            transformarHermanos(
+                hijos,
+                0,
+                profundidad + 1,
+                "Hijo Izq de " + nodo.getDato().getCodigo(),
+                sb
+            );
+        }
     }
 
-    // Mision 3: traslado seguro entre paralelos (TrasladoEstudiantes)
-    public boolean trasladarEstudiante(String codOrigen, String codDestino, int matricula) {
-        return TrasladoEstudiantes.trasladar(buscar(codOrigen), buscar(codDestino), matricula);
+    private void transformarHermanos(
+            List<NodoUnidad> hermanos,
+            int indice,
+            int profundidad,
+            String relacion,
+            StringBuilder sb) {
+
+        if (indice >= hermanos.size()) {
+            return;
+        }
+
+        NodoUnidad actual = hermanos.get(indice);
+
+        // Primero se representa el nodo y su hijo izquierdo
+        transformarNodo(
+            actual,
+            profundidad,
+            relacion,
+            sb
+        );
+
+        // Luego el siguiente hermano derecho del nodo actual
+        if (indice + 1 < hermanos.size()) {
+
+            transformarHermanos(
+                hermanos,
+                indice + 1,
+                profundidad + 1,
+                "Hermano Der de "
+                    + actual.getDato().getCodigo(),
+                sb
+            );
+        }
     }
 }

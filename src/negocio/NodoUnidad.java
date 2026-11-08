@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import modelo.UnidadAcademica;
 
-// Responsable: Monica Tacuri
 public class NodoUnidad {
 
     private final UnidadAcademica dato;

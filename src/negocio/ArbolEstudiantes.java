@@ -5,7 +5,6 @@ import java.util.List;
 import modelo.Estudiante;
 import java.util.ArrayList;
 
-// Responsable: Darwin Tisalema
 public class ArbolEstudiantes {
 
     private NodoEstudiante raiz;
@@ -278,23 +277,5 @@ public class ArbolEstudiantes {
         return nodo.getDato().getPromedio()
                 + sumarPromedios(nodo.getIzquierdo())
                 + sumarPromedios(nodo.getDerecho());
-    }
-
-    // Mision 5: cuenta los estudiantes con promedio >= notaMinima (recursivo, O(n))
-    public int contarAprobados(double notaMinima) {
-        if (!Double.isFinite(notaMinima) || notaMinima < 0 || notaMinima > 10) {
-            throw new IllegalArgumentException("La nota minima debe estar entre 0 y 10");
-        }
-        return contarAprobados(raiz, notaMinima);
-    }
-
-    private int contarAprobados(NodoEstudiante nodo, double notaMinima) {
-        if (nodo == null) {
-            return 0; // caso base: subarbol vacio
-        }
-        int actual = nodo.getDato().getPromedio() >= notaMinima ? 1 : 0;
-        return actual
-                + contarAprobados(nodo.getIzquierdo(), notaMinima)
-                + contarAprobados(nodo.getDerecho(), notaMinima);
     }
 }
