@@ -47,14 +47,16 @@ java -cp out app.RetoIntegrador
 | Opción | Acción                                                   |
 | ------ | -------------------------------------------------------- |
 | 1      | Consultar la jerarquía académica y la ruta de una unidad |
-| 2      | Insertar o buscar estudiantes                            |
-| 3      | Consultar recorridos y estadísticas                      |
-| 4      | Modificar o eliminar estudiantes                         |
+| 2      | Insertar o buscar estudiantes en un paralelo             |
+| 3      | Consultar recorridos y estadísticas de un paralelo       |
+| 4      | Modificar o eliminar estudiantes de un paralelo          |
 | 5      | Eliminar unidades o mostrar la transformación binaria    |
-| 6      | Consultar el estado general del sistema                  |
+| 6      | Estado general: árbol y ambos paralelos                  |
 | 7      | Reiniciar los datos de ejemplo                           |
 | 8      | Ejecutar el reto integrador                              |
 | 0      | Salir                                                    |
+
+En las opciones 2, 3 y 4 se escribe el código del paralelo (`EB-N1-A` o `EB-N1-B`); con Enter se usa `EB-N1-A`.
 
 ## Responsables
 
@@ -66,6 +68,21 @@ java -cp out app.RetoIntegrador
 | Luis Silva            | Misión 4 · Modificación segura y casos de eliminación del ABB |
 | Darwin Tisalema       | Misión 5 · Recorridos y estadísticas comparadas               |
 | Josué Jampier Camacho | Documentación, decisiones y evidencias de ejecución           |
+
+### Clases por integrante
+
+Cada clase tiene un solo responsable. `ArbolOrganizacional` conserva los métodos que pide el enunciado y delega cada operación del reto en la clase de quien la programa.
+
+| Integrante            | Clases                                                                                          |
+| --------------------- | ----------------------------------------------------------------------------------------------- |
+| Damian Cunalata       | `ArbolOrganizacional`, `RutaJerarquica`, `Contexto`, `Main`, `RetoIntegrador`, `RetoMision1`    |
+| Mónica Tacuri         | `NodoUnidad`, `NodoBinario`, `EliminadorUnidades`, `TransformadorBinario`, `RetoMision2`        |
+| Kenneth Chalco        | `Estudiante`, `UnidadAcademica`, `TipoUnidad`, `TrasladoEstudiantes`, `RetoMision3`             |
+| Luis Silva            | `NodoEstudiante`, `Reporte`, `RetoMision4`                                                      |
+| Darwin Tisalema       | `TipoRecorrido`, `ArbolEstudiantes`, `RetoMision5`                                              |
+| Josué Jampier Camacho | `README.md`, `docs/decisiones.md`, `docs/evidencias.md`, `docs/salida_reto.txt`                 |
+
+Cada misión se explica en `docs/misiones/`, escrita por su responsable.
 
 ## Resultado y documentación
 

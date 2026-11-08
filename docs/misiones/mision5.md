@@ -1,6 +1,6 @@
 # Misión 5 — Recorridos y estadísticas comparadas
 
-> **Responsable:** Darwin Tisalema · **Archivos:** `ArbolEstudiantes.java`, `RetoMision5.java`, `Main.java` (opción 3)
+> **Responsable:** Darwin Tisalema · **Archivos:** `ArbolEstudiantes.java`, `RetoMision5.java`
 
 ## `contarAprobados(double notaMinima)`
 

@@ -171,10 +171,10 @@ public class Main {
             return;
         }
 
+        ArbolEstudiantes abb = elegirParalelo(c, in);
+
         System.out.print("Matricula: ");
         int matricula = Integer.parseInt(in.nextLine().trim());
-
-        ArbolEstudiantes abb = c.estudiantes();
 
         if (opcion.equals("2")) {
 
@@ -225,7 +225,7 @@ public class Main {
 
         System.out.println("\n===== RECORRIDOS Y ESTADISTICAS =====");
 
-        ArbolEstudiantes abb = c.estudiantes();
+        ArbolEstudiantes abb = elegirParalelo(c, in);
 
         System.out.println("1. Mostrar recorridos");
         System.out.println("2. Mostrar estadisticas");
@@ -312,12 +312,12 @@ public class Main {
             return;
         }
 
+        ArbolEstudiantes abb = elegirParalelo(c, in);
+
         System.out.print("Matricula: ");
         int matricula = Integer.parseInt(
             in.nextLine().trim()
         );
-
-        ArbolEstudiantes abb = c.estudiantes();
 
         if (opcion.equals("2")) {
 
@@ -452,32 +452,36 @@ public class Main {
         }
     }
 
+    // Pregunta el codigo del paralelo; con Enter se usa EB-N1-A
+    private static ArbolEstudiantes elegirParalelo(Contexto c, Scanner in) {
+
+        System.out.print(
+            "Paralelo (" + c.paralelo + " o " + c.paraleloDestino
+                + ", Enter = " + c.paralelo + "): "
+        );
+
+        String codigo = in.nextLine().trim();
+
+        if (codigo.isEmpty()) {
+            codigo = c.paralelo;
+        }
+
+        NodoUnidad nodo = c.organizacion.buscar(codigo);
+
+        if (nodo == null || nodo.getEstudiantes() == null) {
+            throw new IllegalArgumentException(
+                "El codigo " + codigo + " no corresponde a un paralelo."
+            );
+        }
+
+        System.out.println("Paralelo: " + nodo.getDato().getCodigo());
+
+        return nodo.getEstudiantes();
+    }
+
     private static void mostrarEstadoSistema(Contexto c) {
 
         System.out.println("\n===== ESTADO GENERAL SJA-UTA =====");
-
-        NodoUnidad nodo = c.organizacion.buscar(c.paralelo);
-
-        if (nodo == null || nodo.getEstudiantes() == null) {
-
-            System.out.println(
-                "ERROR: el paralelo activo no tiene un ABB valido."
-            );
-
-            return;
-        }
-
-        ArbolEstudiantes abb = c.estudiantes();
-
-        boolean vinculado = nodo.getEstudiantes() == abb;
-
-        System.out.println(
-            "Paralelo activo: " + c.paralelo
-        );
-
-        System.out.println(
-            "ABB vinculado: " + vinculado
-        );
 
         System.out.println("\n--- Arbol organizacional ---");
 
@@ -489,12 +493,35 @@ public class Main {
             "Hojas: " + c.organizacion.contarHojas()
         );
 
-        System.out.println(
-            "Nivel del paralelo: " +
-            c.organizacion.nivel(c.paralelo)
-        );
+        for (String codigo : new String[]{c.paralelo, c.paraleloDestino}) {
+            mostrarEstadoParalelo(c, codigo);
+        }
 
-        System.out.println("\n--- Arbol de estudiantes ---");
+        System.out.println(
+            "\nDiagnostico finalizado."
+        );
+    }
+
+    private static void mostrarEstadoParalelo(Contexto c, String codigo) {
+
+        System.out.println("\n--- Paralelo " + codigo + " ---");
+
+        NodoUnidad nodo = c.organizacion.buscar(codigo);
+
+        if (nodo == null || nodo.getEstudiantes() == null) {
+
+            System.out.println(
+                "El paralelo no existe. Reinicie los datos con 7."
+            );
+
+            return;
+        }
+
+        ArbolEstudiantes abb = nodo.getEstudiantes();
+
+        System.out.println(
+            "Nivel del paralelo: " + c.organizacion.nivel(codigo)
+        );
 
         System.out.println(
             "Cantidad: " + abb.contar()
@@ -527,9 +554,5 @@ public class Main {
                 abb.promedioGeneral()
             );
         }
-
-        System.out.println(
-            "\nDiagnostico finalizado."
-        );
     }
 }
