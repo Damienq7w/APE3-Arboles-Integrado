@@ -1,0 +1,203 @@
+
+==================================================
+RETO INTEGRADOR SJA-UTA - GRUPO 2
+==================================================
+Se parte siempre de los datos iniciales (reinicio automatico).
+Asi, repetir la opcion 8 no duplica unidades ni estudiantes.
+
+==================================================
+MISION 1 - Jerarquia y ruta institucional
+==================================================
+Antes: altura 4 | hojas 2
+  [OK]    Agregar carrera SW bajo FCHE | esperado: true | obtenido: true
+  [OK]    Agregar nivel SW-N3 bajo SW | esperado: true | obtenido: true
+  [OK]    Agregar paralelo SW-N3-A bajo SW-N3 | esperado: true | obtenido: true
+  [OK]    Agregar SW otra vez (codigo repetido) | esperado: false | obtenido: false
+  [OK]    Agregar un PARALELO directo bajo FCHE (salta niveles) | esperado: false | obtenido: false
+  [OK]    Agregar bajo un padre inexistente | esperado: false | obtenido: false
+
+UTA - Universidad Tecnica de Ambato (UNIVERSIDAD)
+  FCHE - Ciencias Humanas y de la Educacion (FACULTAD)
+    EB - Educacion Basica (CARRERA)
+      EB-N1 - Nivel 1 (NIVEL)
+        EB-N1-A - Paralelo A (PARALELO)
+        EB-N1-B - Paralelo B vacio (PARALELO)
+    SW - Software (CARRERA)
+      SW-N3 - Nivel 3 (NIVEL)
+        SW-N3-A - Paralelo A (PARALELO)
+
+  [OK]    Nivel de SW | esperado: 2 | obtenido: 2
+  [OK]    Nivel de SW-N3 | esperado: 3 | obtenido: 3
+  [OK]    Nivel de SW-N3-A | esperado: 4 | obtenido: 4
+  [OK]    Altura del arbol (aristas) | esperado: 4 | obtenido: 4
+  [OK]    Hojas: EB-N1-A, EB-N1-B y SW-N3-A | esperado: 3 | obtenido: 3
+  [OK]    Ruta de EB-N1-A | esperado: UTA -> FCHE -> EB -> EB-N1 -> EB-N1-A | obtenido: UTA -> FCHE -> EB -> EB-N1 -> EB-N1-A
+  [OK]    Ruta de SW-N3-A (en minusculas) | esperado: UTA -> FCHE -> SW -> SW-N3 -> SW-N3-A | obtenido: UTA -> FCHE -> SW -> SW-N3 -> SW-N3-A
+  [OK]    Ruta de la raiz | esperado: UTA | obtenido: UTA
+  [OK]    Ruta de un codigo inexistente | esperado: No existe | obtenido: No existe
+
+==================================================
+MISION 2 - Proteccion de unidades y transformacion binaria
+==================================================
+  [OK]    Eliminar EB-N1-A (paralelo con 9 estudiantes) | esperado: false | obtenido: false
+  [OK]    Eliminar EB-N1 (tiene subunidades) | esperado: false | obtenido: false
+  [OK]    Eliminar FCHE (tiene subunidades) | esperado: false | obtenido: false
+  [OK]    Eliminar UTA (raiz del sistema) | esperado: false | obtenido: false
+  [OK]    Eliminar XYZ (codigo inexistente) | esperado: false | obtenido: false
+  [OK]    EB-N1-A sigue existiendo | esperado: true | obtenido: true
+
+Arbol binario (HI = hijo izquierdo, HD = hermano derecho):
+Raiz: UTA
+  HI de UTA: FCHE
+    HI de FCHE: EB
+      HI de EB: EB-N1
+        HI de EB-N1: EB-N1-A
+          HD de EB-N1-A: EB-N1-B
+      HD de EB: SW
+        HI de SW: SW-N3
+          HI de SW-N3: SW-N3-A
+
+  [OK]    Relacion de FCHE | esperado: FCHE: HI = EB | HD = null | obtenido: FCHE: HI = EB | HD = null
+  [OK]    EB tiene a SW como hermano derecho | esperado: EB: HI = EB-N1 | HD = SW | obtenido: EB: HI = EB-N1 | HD = SW
+  [OK]    EB-N1-A tiene a EB-N1-B como hermano derecho | esperado: EB-N1-A: HI = null | HD = EB-N1-B | obtenido: EB-N1-A: HI = null | HD = EB-N1-B
+  [OK]    SW es el ultimo hermano | esperado: SW: HI = SW-N3 | HD = null | obtenido: SW: HI = SW-N3 | HD = null
+  [OK]    La transformacion no altera el arbol general
+  [OK]    Eliminar SW-N3-A (hoja vacia) | esperado: true | obtenido: true
+  [OK]    SW-N3-A ya no existe | esperado: null | obtenido: null
+  [OK]    SW-N3 queda como hoja (grado 0) | esperado: 0 | obtenido: 0
+  [OK]    Eliminar SW-N3-A por segunda vez | esperado: false | obtenido: false
+
+==================================================
+MISION 3 - Validacion de datos y traslado entre paralelos
+==================================================
+Validaciones de Estudiante:
+  [OK]    Matricula 0 rechazada
+  [OK]    Matricula negativa rechazada
+  [OK]    Promedio -0.5 rechazado
+  [OK]    Promedio 10.5 rechazado
+  [OK]    Promedio NaN rechazado
+  [OK]    Promedio Infinity rechazado
+  [OK]    Promedio -Infinity rechazado
+  [OK]    Promedio 0 aceptado (limite)
+  [OK]    Promedio 10 aceptado (limite)
+  [OK]    setPromedio(NaN) rechazado y conserva 7.5
+
+Traslados que deben rechazarse (no cambian ningun arbol):
+  [OK]    Origen inexistente | esperado: false | obtenido: false
+  [OK]    Destino inexistente | esperado: false | obtenido: false
+  [OK]    Destino que no es PARALELO (EB-N1) | esperado: false | obtenido: false
+  [OK]    Origen que no es PARALELO (FCHE) | esperado: false | obtenido: false
+  [OK]    Origen igual al destino | esperado: false | obtenido: false
+  [OK]    Matricula 99 no existe en el origen | esperado: false | obtenido: false
+  [OK]    EB-N1-A conserva sus 9 estudiantes | esperado: 10 15 20 30 35 40 45 50 55 | obtenido: 10 15 20 30 35 40 45 50 55
+  [OK]    EB-N1-B sigue vacio | esperado: true | obtenido: true
+  [OK]    Matricula 55 ya existe en el destino (contexto auxiliar) | esperado: false | obtenido: false
+  [OK]    El 55 sigue en el origen y el destino no se duplica
+  [OK]    Traslado valido de 20 (contexto auxiliar) | esperado: true | obtenido: true
+  [OK]    El 20 ya no esta en el origen | esperado: null | obtenido: null
+  [OK]    El 20 llega al destino con los mismos datos | esperado: [20] Estudiante 20 | CI 0000000020 | promedio 8,00 | obtenido: [20] Estudiante 20 | CI 0000000020 | promedio 8,00
+
+==================================================
+MISION 4 - Modificacion segura y casos de eliminacion del ABB
+==================================================
+  [OK]    Modificar promedio de 35 a 9.80 | esperado: true | obtenido: true
+  [OK]    Promedio de 35 actualizado | esperado: 9.8 | obtenido: 9.8
+  [OK]    Actualizar 35 con cedula invalida '123' es rechazado
+  [OK]    Actualizar 35 con promedio 15 es rechazado
+  [OK]    El registro valido de 35 no cambio | esperado: [35] Estudiante 35 | CI 0000000035 | promedio 9,80 | obtenido: [35] Estudiante 35 | CI 0000000035 | promedio 9,80
+  [OK]    Modificar una matricula inexistente (99) | esperado: false | obtenido: false
+
+Traslado de 10 (nodo hoja en el origen)
+  Inorden origen antes:   10 15 20 30 35 40 45 50 55
+  Inorden origen despues: 15 20 30 35 40 45 50 55
+  Inorden destino:        10
+  [OK]    Traslado de 10 | esperado: true | obtenido: true
+  [OK]    Caso de eliminacion de 10 | esperado: nodo hoja | obtenido: nodo hoja
+  [OK]    El origen conserva el orden | esperado: true | obtenido: true
+
+Traslado de 40 (nodo con un hijo en el origen)
+  Inorden origen antes:   15 20 30 35 40 45 50 55
+  Inorden origen despues: 15 20 30 35 45 50 55
+  Inorden destino:        10 40
+  [OK]    Traslado de 40 | esperado: true | obtenido: true
+  [OK]    Caso de eliminacion de 40 | esperado: nodo con un hijo | obtenido: nodo con un hijo
+  [OK]    El origen conserva el orden | esperado: true | obtenido: true
+
+Traslado de 45 (nodo con dos hijos en el origen)
+  Inorden origen antes:   15 20 30 35 45 50 55
+  Inorden origen despues: 15 20 30 35 50 55
+  Inorden destino:        10 40 45
+  [OK]    Traslado de 45 | esperado: true | obtenido: true
+  [OK]    Caso de eliminacion de 45 | esperado: nodo con dos hijos | obtenido: nodo con dos hijos
+  [OK]    El origen conserva el orden | esperado: true | obtenido: true
+
+Traslado de 30 (raiz en el origen)
+  Inorden origen antes:   15 20 30 35 50 55
+  Inorden origen despues: 15 20 35 50 55
+  Inorden destino:        10 30 40 45
+  [OK]    Traslado de 30 | esperado: true | obtenido: true
+  [OK]    Caso de eliminacion de 30 | esperado: raiz | obtenido: raiz
+  [OK]    El origen conserva el orden | esperado: true | obtenido: true
+
+  [OK]    EB-N1-A final | esperado: 15 20 35 50 55 | obtenido: 15 20 35 50 55
+  [OK]    EB-N1-B final | esperado: 10 30 40 45 | obtenido: 10 30 40 45
+  [OK]    Repetir el traslado de 10 (ya esta en destino) | esperado: false | obtenido: false
+
+==================================================
+MISION 5 - Recorridos y estadisticas comparadas
+==================================================
+Dato                   | EB-N1-A          | EB-N1-B         
+------------------------------------------------------------
+Preorden               | 35 15 20 50 55   | 10 40 30 45     
+Inorden                | 15 20 35 50 55   | 10 30 40 45     
+Posorden               | 20 15 55 50 35   | 30 45 40 10     
+Cantidad               | 5                | 4               
+Altura (aristas)       | 2                | 2               
+Matricula menor        | 15               | 10              
+Matricula mayor        | 55               | 45              
+Promedio general       | 8.36             | 8.00            
+Aprobados (>= 8.00)    | 5                | 4               
+Aprobados (>= 9.00)    | 1                | 0               
+
+  [OK]    Inorden EB-N1-A | esperado: 15 20 35 50 55 | obtenido: 15 20 35 50 55
+  [OK]    Inorden EB-N1-B | esperado: 10 30 40 45 | obtenido: 10 30 40 45
+  [OK]    Cantidad EB-N1-A | esperado: 5 | obtenido: 5
+  [OK]    Cantidad EB-N1-B | esperado: 4 | obtenido: 4
+  [OK]    Altura EB-N1-A | esperado: 2 | obtenido: 2
+  [OK]    Altura EB-N1-B | esperado: 2 | obtenido: 2
+  [OK]    Menor y mayor EB-N1-A | esperado: 15-55 | obtenido: 15-55
+  [OK]    Menor y mayor EB-N1-B | esperado: 10-45 | obtenido: 10-45
+  [OK]    Promedio EB-N1-A | esperado: 8.36 | obtenido: 8.36
+  [OK]    Promedio EB-N1-B | esperado: 8.00 | obtenido: 8.00
+  [OK]    Aprobados EB-N1-A con 8.00 | esperado: 5 | obtenido: 5
+  [OK]    Aprobados EB-N1-B con 8.00 | esperado: 4 | obtenido: 4
+  [OK]    Aprobados EB-N1-A con 9.00 (solo el 35) | esperado: 1 | obtenido: 1
+  [OK]    Aprobados en un ABB vacio | esperado: 0 | obtenido: 0
+  [OK]    Nota minima 11 rechazada
+  [OK]    Nota minima NaN rechazada
+
+Comparacion: EB-N1-A queda con 5 estudiantes y promedio 8.36 porque conserva
+al 35 (9.80); EB-N1-B recibe 4 estudiantes con 8.00. Ambos tienen altura 2.
+Por que el inorden sale ordenado: en un ABB todo el subarbol izquierdo es menor
+que el nodo y todo el derecho es mayor. El inorden visita izquierdo -> nodo ->
+derecho, asi que cada matricula aparece despues de todas las menores y antes de
+todas las mayores. Por eso los traslados no rompen el orden de ninguno de los dos.
+
+==================================================
+MISION 6 - Integracion y reinicio
+==================================================
+  [OK]    Ejecutar el reto dos veces deja exactamente el mismo estado
+Despues de reiniciar (opcion 7):
+  [OK]    Jerarquia igual a la inicial (sin SW ni sus subunidades)
+  [OK]    Unidad SW eliminada por el reinicio | esperado: null | obtenido: null
+  [OK]    Unidad SW-N3-A eliminada por el reinicio | esperado: null | obtenido: null
+  [OK]    Inorden de EB-N1-A con las 9 matriculas | esperado: 10 15 20 30 35 40 45 50 55 | obtenido: 10 15 20 30 35 40 45 50 55
+  [OK]    EB-N1-B vacio | esperado: true | obtenido: true
+  [OK]    Matricula 35 vuelve a promedio 8.00 | esperado: 8.0 | obtenido: 8.0
+
+==================================================
+RESUMEN
+==================================================
+Resultado: 97/97 verificaciones OK
+El estado final del reto queda cargado. Use la opcion 7 para volver a los datos iniciales.
+
