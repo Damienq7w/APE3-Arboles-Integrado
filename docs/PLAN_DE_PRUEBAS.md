@@ -131,3 +131,9 @@ La salida de la comprobación final se guarda en
 El resultado previsto es de 113 verificaciones correctas. Esta cifra es una referencia del plan y no sustituye la comprobación real.
 
 Después de la ejecución final se debe actualizar esta sección con el total ejecutado, las verificaciones correctas y las fallidas.
+
+## Evidencias de ejecución
+
+1. [Inicio de las pruebas](Evidencia/01-inicio-pruebas.png)
+2. [Ejecución de los casos de prueba](Evidencia/02-ejecucion-pruebas.png)
+3. [Resumen final de las pruebas](Evidencia/03-resumen-pruebas.png)
