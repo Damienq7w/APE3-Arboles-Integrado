@@ -128,6 +128,7 @@ Consulta [COLABORACION.md](COLABORACION.md) para revisar la organización del tr
 
 ## Repositorios de las fases
 
-- Fases 1 y 2: https://github.com/Damienq7w/APE3-Arboles-Grupo2
+- Fase 1: https://github.com/juanchicoyunda1234/APE3-Arboles
+- Fase 2: https://github.com/Damienq7w/APE3-Arboles-Grupo2
 - Fase 3: https://github.com/ElJoss09/APE3_ArbolGeneral_ABB_Grupo3
 - Fase 4: https://github.com/shirleymikaela2/APE3-Grupo4-Integracion-y-pruebas-

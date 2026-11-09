@@ -115,6 +115,7 @@ Estos registros permiten consultar la participación y la integración de los ca
 
 | Fases | Repositorio                                                           |
 | ----- | --------------------------------------------------------------------- |
-| 1 y 2 | https://github.com/Damienq7w/APE3-Arboles-Grupo2                      |
+| 1     | https://github.com/juanchicoyunda1234/APE3-Arboles                    |
+| 2     | https://github.com/Damienq7w/APE3-Arboles-Grupo2                      |
 | 3     | https://github.com/ElJoss09/APE3_ArbolGeneral_ABB_Grupo3              |
 | 4     | https://github.com/shirleymikaela2/APE3-Grupo4-Integracion-y-pruebas- |
