@@ -1,0 +1,153 @@
+==================================================
+PRUEBAS DEL SJA-UTA - APE 3 - GRUPO 2
+==================================================
+
+==================================================
+ARBOL GENERAL (A1 a A4) - Damian Cunalata
+==================================================
+Casos normales:
+  [OK]    Altura inicial UTA -> FCHE -> EB -> EB-N1 -> paralelo | esperado: 4 | obtenido: 4
+  [OK]    Hojas iniciales: EB-N1-A y EB-N1-B | esperado: 2 | obtenido: 2
+  [OK]    Grado de EB-N1 (dos paralelos) | esperado: 2 | obtenido: 2
+  [OK]    Nivel de la raiz UTA | esperado: 0 | obtenido: 0
+  [OK]    Nivel de EB-N1-A | esperado: 4 | obtenido: 4
+  [OK]    Buscar sin distinguir mayusculas (eb-n1-a) | esperado: true | obtenido: true
+  [OK]    Buscar con espacios exteriores | esperado: true | obtenido: true
+  [OK]    Agregar la carrera SW bajo FCHE | esperado: true | obtenido: true
+  [OK]    SW es una hoja nueva: ahora hay 3 hojas | esperado: 3 | obtenido: 3
+  [OK]    Grado de FCHE despues de agregar SW | esperado: 2 | obtenido: 2
+  [OK]    La jerarquia empieza por la raiz | esperado: true | obtenido: true
+  [OK]    La jerarquia usa 2 espacios por nivel (EB en nivel 2) | esperado: true | obtenido: true
+  [OK]    Nivel de la carrera SW recien agregada | esperado: 2 | obtenido: 2
+Casos limite:
+  [OK]    Agregar un codigo repetido (SW) | esperado: false | obtenido: false
+  [OK]    Agregar bajo un padre inexistente | esperado: false | obtenido: false
+  [OK]    Agregar saltando la jerarquia (NIVEL bajo FACULTAD) | esperado: false | obtenido: false
+  [OK]    Agregar una unidad nula | esperado: false | obtenido: false
+  [OK]    Buscar un codigo inexistente | esperado: null | obtenido: null
+  [OK]    Buscar con codigo nulo | esperado: null | obtenido: null
+  [OK]    Grado de un codigo inexistente | esperado: -1 | obtenido: -1
+  [OK]    Nivel de un codigo inexistente | esperado: -1 | obtenido: -1
+  [OK]    Agregar con codigo de padre nulo | esperado: false | obtenido: false
+  [OK]    Nivel con codigo nulo | esperado: -1 | obtenido: -1
+  [OK]    Arbol con solo la raiz: altura 0 | esperado: 0 | obtenido: 0
+  [OK]    Arbol con solo la raiz: 1 hoja | esperado: 1 | obtenido: 1
+  [OK]    La raiz debe ser UNIVERSIDAD | esperado: true | obtenido: true
+
+==================================================
+INSERCION, BUSQUEDA Y VALIDACIONES (B1, B2) - Kenneth Chalco
+==================================================
+Casos normales:
+  [OK]    Un ABB nuevo esta vacio | esperado: true | obtenido: true
+  [OK]    Insertar 50 | esperado: true | obtenido: true
+  [OK]    Insertar 30 | esperado: true | obtenido: true
+  [OK]    Insertar 70 | esperado: true | obtenido: true
+  [OK]    La primera matricula queda como raiz | esperado: 50 | obtenido: 50
+  [OK]    30 queda a la izquierda de la raiz | esperado: 30 | obtenido: 30
+  [OK]    70 queda a la derecha de la raiz | esperado: 70 | obtenido: 70
+  [OK]    Buscar 70 encuentra al estudiante | esperado: 70 | obtenido: 70
+  [OK]    Cantidad despues de 3 inserciones | esperado: 3 | obtenido: 3
+Casos limite:
+  [OK]    Buscar en un ABB vacio devuelve null | esperado: null | obtenido: null
+  [OK]    Buscar una matricula inexistente devuelve null | esperado: null | obtenido: null
+  [OK]    Insertar una matricula repetida (30) se rechaza | esperado: false | obtenido: false
+  [OK]    La repetida no cambia la cantidad | esperado: 3 | obtenido: 3
+  [OK]    Insertar null lanza excepcion | esperado: true | obtenido: true
+  [OK]    Matricula 0 rechazada | esperado: true | obtenido: true
+  [OK]    Matricula negativa rechazada | esperado: true | obtenido: true
+  [OK]    Cedula de 3 digitos rechazada | esperado: true | obtenido: true
+  [OK]    Nombres en blanco rechazados | esperado: true | obtenido: true
+  [OK]    Promedio 10.5 rechazado | esperado: true | obtenido: true
+  [OK]    Promedio NaN rechazado | esperado: true | obtenido: true
+  [OK]    Promedio Infinity rechazado | esperado: true | obtenido: true
+  [OK]    Promedios limite 0 y 10 aceptados | esperado: true | obtenido: true
+  [OK]    Buscar despues de insertar varias claves | esperado: true | obtenido: true
+
+==================================================
+RECORRIDOS Y ESTADISTICAS (B3, B6) - Darwin Tisalema
+==================================================
+Casos normales:
+  [OK]    Preorden (raiz, izquierdo, derecho) | esperado: 30 15 10 20 45 40 35 50 55 | obtenido: 30 15 10 20 45 40 35 50 55
+  [OK]    Inorden (sale ordenado) | esperado: 10 15 20 30 35 40 45 50 55 | obtenido: 10 15 20 30 35 40 45 50 55
+  [OK]    Posorden (izquierdo, derecho, raiz) | esperado: 10 20 15 35 40 55 50 45 30 | obtenido: 10 20 15 35 40 55 50 45 30
+  [OK]    La traza termina con la secuencia del preorden | esperado: true | obtenido: true
+  [OK]    La traza visita los 9 nodos | esperado: 9 | obtenido: 9
+  [OK]    La traza regresa en 10 hijos null (n + 1) | esperado: 10 | obtenido: 10
+  [OK]    Cantidad de estudiantes | esperado: 9 | obtenido: 9
+  [OK]    Altura en aristas | esperado: 3 | obtenido: 3
+  [OK]    Menor matricula | esperado: 10 | obtenido: 10
+  [OK]    Mayor matricula | esperado: 55 | obtenido: 55
+  [OK]    Promedio general | esperado: 8.0 | obtenido: 8.0
+  [OK]    Traza en inorden: secuencia ordenada | esperado: true | obtenido: true
+Casos limite:
+  [OK]    Recorrido de un ABB vacio | esperado:  | obtenido: 
+  [OK]    Altura de un ABB vacio | esperado: -1 | obtenido: -1
+  [OK]    Cantidad de un ABB vacio | esperado: 0 | obtenido: 0
+  [OK]    Menor de un ABB vacio | esperado: null | obtenido: null
+  [OK]    Promedio de un ABB vacio | esperado: 0.0 | obtenido: 0.0
+  [OK]    Mayor de un ABB vacio | esperado: null | obtenido: null
+  [OK]    Altura de un ABB con un solo nodo | esperado: 0 | obtenido: 0
+  [OK]    Insercion ordenada: el ABB degenera en cadena (altura n - 1) | esperado: 4 | obtenido: 4
+  [OK]    En la cadena el preorden coincide con el inorden | esperado: 10 20 30 40 50 | obtenido: 10 20 30 40 50
+  [OK]    Recorrido con tipo null lanza excepcion | esperado: true | obtenido: true
+  [OK]    Traza con tipo null lanza excepcion | esperado: true | obtenido: true
+  [OK]    Promedio con un solo estudiante | esperado: 9.5 | obtenido: 9.5
+
+==================================================
+MODIFICACION Y ELIMINACION (B4, B5) - Luis Silva
+==================================================
+Modificacion:
+  [OK]    Modificar el promedio de 35 a 9.80 | esperado: true | obtenido: true
+  [OK]    El promedio de 35 quedo en 9.80 | esperado: 9.8 | obtenido: 9.8
+  [OK]    Modificar con cedula invalida lanza excepcion | esperado: true | obtenido: true
+  [OK]    Modificar con promedio 15 lanza excepcion | esperado: true | obtenido: true
+  [OK]    Los intentos invalidos no alteran el registro | esperado: [35] Estudiante 35 | CI 0000000035 | promedio 9,80 | obtenido: [35] Estudiante 35 | CI 0000000035 | promedio 9,80
+  [OK]    Modificar una matricula inexistente | esperado: false | obtenido: false
+Eliminacion (cada caso sobre el arbol que deja el anterior):
+  [OK]    Eliminar 10: nodo hoja | esperado: true | obtenido: true
+  [OK]    Inorden despues de eliminar 10 | esperado: 15 20 30 35 40 45 50 55 | obtenido: 15 20 30 35 40 45 50 55
+  [OK]    Eliminar 40: nodo con un hijo (35) | esperado: true | obtenido: true
+  [OK]    Inorden despues de eliminar 40 | esperado: 15 20 30 35 45 50 55 | obtenido: 15 20 30 35 45 50 55
+  [OK]    Eliminar 45: dos hijos, lo reemplaza el sucesor 50 | esperado: true | obtenido: true
+  [OK]    Inorden despues de eliminar 45 | esperado: 15 20 30 35 50 55 | obtenido: 15 20 30 35 50 55
+  [OK]    Eliminar 30: la raiz con dos hijos | esperado: true | obtenido: true
+  [OK]    La nueva raiz es el sucesor inorden 35 | esperado: 35 | obtenido: 35
+  [OK]    Inorden despues de eliminar la raiz | esperado: 15 20 35 50 55 | obtenido: 15 20 35 50 55
+  [OK]    Cantidad despues de 4 eliminaciones | esperado: 5 | obtenido: 5
+Casos limite:
+  [OK]    Eliminar una matricula inexistente | esperado: false | obtenido: false
+  [OK]    Eliminar en un ABB vacio | esperado: false | obtenido: false
+  [OK]    Eliminar todos los estudiantes deja el ABB vacio | esperado: true | obtenido: true
+
+==================================================
+ELIMINACION DE UNIDADES Y TRANSFORMACION (A5, A6) - Monica Tacuri
+==================================================
+Transformacion a binario (hijo izquierdo / hermano derecho):
+  [OK]    La transformacion empieza por la raiz | esperado: true | obtenido: true
+  [OK]    FCHE es el hijo izquierdo de UTA | esperado: true | obtenido: true
+  [OK]    EB-N1-A es el hijo izquierdo de EB-N1 | esperado: true | obtenido: true
+  [OK]    EB-N1-B es el hermano derecho de EB-N1-A | esperado: true | obtenido: true
+  [OK]    Una linea por cada una de las 6 unidades | esperado: 6 | obtenido: 6
+  [OK]    La transformacion no altera el arbol general
+  [OK]    Transformar un arbol con solo la raiz | esperado: Raiz: UTA | obtenido: Raiz: UTA
+Eliminacion de unidades (casos limite):
+  [OK]    Eliminar EB-N1-A: paralelo con 9 estudiantes | esperado: false | obtenido: false
+  [OK]    Eliminar EB-N1: tiene subunidades | esperado: false | obtenido: false
+  [OK]    Eliminar UTA: la raiz tiene subunidades | esperado: false | obtenido: false
+  [OK]    Eliminar un codigo inexistente | esperado: false | obtenido: false
+  [OK]    Eliminar con codigo nulo | esperado: false | obtenido: false
+  [OK]    Las unidades protegidas siguen existiendo | esperado: true | obtenido: true
+Eliminacion de unidades (casos normales):
+  [OK]    Eliminar EB-N1-B: paralelo vacio y sin hijos | esperado: true | obtenido: true
+  [OK]    EB-N1-B ya no existe | esperado: null | obtenido: null
+  [OK]    EB-N1 queda con un solo hijo | esperado: 1 | obtenido: 1
+  [OK]    Ahora queda una sola hoja | esperado: 1 | obtenido: 1
+  [OK]    Eliminar EB-N1-B por segunda vez | esperado: false | obtenido: false
+  [OK]    EB-N1-A ya no tiene hermano derecho | esperado: false | obtenido: false
+  [OK]    Eliminar la raiz cuando es la unica unidad | esperado: true | obtenido: true
+  [OK]    El arbol queda vacio | esperado: Arbol organizacional vacio. | obtenido: Arbol organizacional vacio.
+
+==================================================
+RESUMEN DE PRUEBAS
+==================================================
+Resultado: 113/113 pruebas OK
